@@ -2,16 +2,24 @@ const puppeteer = require('puppeteer');
 const $ = require('cheerio');
 const url = 'https://gamebattles.majorleaguegaming.com/pc/overwatch/tournament/fa20-owcc-varsity-series-ms/teams';
 
-function isTeam(str) {
-    let pos = str.search('Eligible');
 
-    if (str.search('Eligible') != -1) {
+// Function tests if the link object
+// is a team or not
+function isTeam(str) {
+    //let pos = str.search('Eligible');
+
+    // In the table of teams there is another link for Eligible and Ineligible
+    if (str.search('Eligible') != -1 
+        || str.search('Ineligible') != -1) {
         return true;
     }
 
     return false;
 }
 
+
+//  Traverses the webpage
+//  Use Puppeteer to look at the whole page and be able to use the Javascript
 puppeteer
   .launch()
 
@@ -20,9 +28,11 @@ puppeteer
   })
 
   .then(function(page) {
+
     return page.goto(url).then(function() {
       return page.content();
     });
+    
   })
 
   .then(function(html) {
