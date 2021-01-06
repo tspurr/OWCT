@@ -27,7 +27,7 @@ class teamMember {
         for(var i = 0; i < this.skillRating.length; i++) {
 
             //Check to see if the skill rating was input for that role
-            if (this.skillRating[i] != -1) {
+            if(this.skillRating[i] != -1) {
                 average += this.skillRating[i];
                 sum++;
             }
@@ -62,7 +62,9 @@ class Team {
 
     // Calculates the avg SR of the top 6 SR on the team
     // Does not take into account 2-2-2 it can be highest sr from a player in any position
+    // This will probably be more useful than looking at the whole avgSR
     top6SR() {
 
     }
-}
+
+} // Class
