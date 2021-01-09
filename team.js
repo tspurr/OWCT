@@ -50,6 +50,13 @@ class Team {
 
     constructor() {
         this.name = "";
+        this.url = "";
+        this.teamMembers = [];
+    }
+
+    constructor(teamName, teamURL) {
+        this.name = teamName;
+        this.url = teamURL;
         this.teamMembers = [];
     }
 
