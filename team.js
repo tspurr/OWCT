@@ -12,14 +12,6 @@ class teamMember {
         this.skillRating = [-1, -1, -1];
     }
 
-    constructor(name, tankSR, damageSR, supportSR) {
-        this.name = name;
-
-        this.skillRating[tankPos]       = tankSR;
-        this.skillRating[damagePos]     = damageSR;
-        this.skillRating[supportPos]    = supportSR;
-    }
-
     // Calculates the average SR of a member
     avgSR() {
         let average = 0, sum = 0;
@@ -48,12 +40,6 @@ class teamMember {
 
 class Team {
 
-    constructor() {
-        this.name = "";
-        this.url = "";
-        this.teamMembers = [];
-    }
-
     constructor(teamName, teamURL) {
         this.name = teamName;
         this.url = teamURL;
@@ -75,3 +61,6 @@ class Team {
     }
 
 } // Class
+
+// Exporting the class to use in the main file
+module.exports.Team = Team;

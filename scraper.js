@@ -3,7 +3,7 @@ const $ = require('cheerio');
 const { Browser } = require('puppeteer/lib/cjs/puppeteer/common/Browser');
 const teamsURL = 'https://gamebattles.majorleaguegaming.com/pc/overwatch/tournament/fa20-owcc-varsity-series-ms/teams';
 
-require('teams.js'); // Load the team class from team.js
+var t = require('./team.js'); // Load the team class from team.js
 let tournament = []; // Array of all the teams in the tournament
 
 
@@ -24,7 +24,9 @@ function isTeam(str) {
 }
 
 
-// ASync function for getting webpage info
+// ===============================
+//       Main Async Function
+// ===============================
 (async () => {
 
     const browser = await puppeteer.launch();
@@ -33,6 +35,7 @@ function isTeam(str) {
     await page.goto(teamsURL); // Going to the major league gaming website
     let bodyHTML = await page.content();
 
+    // Collecting the team names and links to team page on page one
     $('a', bodyHTML).each(function() {
         //console.log($(this).text());
 
@@ -42,9 +45,8 @@ function isTeam(str) {
             let teamURLShort = $(this).attr(`href`);
             let teamURL = `https://gamebattles.majorleaguegaming.com/`+ $(this).attr(`href`);
 
-            // TODO
-            // Store all the teams in an array of teams that have players in them
-            let team = Team(teamName, teamURL);
+            // Store all the teams in an array
+            let team = new t.Team(teamName, teamURL);
             tournament.push(team);
             
             console.log(`1: ${teamName}:\t\t\t${teamURLShort}`);
@@ -54,6 +56,27 @@ function isTeam(str) {
     });
 
     // Click to the next page of teams
-    await page.click('.button[class="paginator-btn-nav"]');
+    await page.click('button[aria-label="Next page"]');
+    bodyHTML = await page.content();
+
+    // Collecting the team names and links to team page on page two
+    $('a', bodyHTML).each(function() {
+        //console.log($(this).text());
+
+        if ( isTeam($(this).text()) ) {
+
+            let teamName = $(this).text().substr(0, $(this).text().search('Eligible') - 1);
+            let teamURLShort = $(this).attr(`href`);
+            let teamURL = `https://gamebattles.majorleaguegaming.com/`+ $(this).attr(`href`);
+
+            // Store all the teams in an array
+            let team = new t.Team(teamName, teamURL);
+            tournament.push(team);
+            
+            console.log(`2: ${teamName}:\t\t\t${teamURLShort}`);
+
+        }
+
+    });
 
 })();
