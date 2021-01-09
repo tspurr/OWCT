@@ -61,7 +61,6 @@ function isTeam(str) {
 
     // Collecting the team names and links to team page on page two
     $('a', bodyHTML).each(function() {
-        //console.log($(this).text());
 
         if ( isTeam($(this).text()) ) {
 
