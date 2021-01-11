@@ -6,6 +6,27 @@ const teamsURL = 'https://gamebattles.majorleaguegaming.com/pc/overwatch/tournam
 var t = require('./team.js'); // Load the team class from team.js
 let tournament = []; // Array of all the teams in the tournament
 
+// The sleep function to add a pause when turning a page
+function sleep(milliseconds) {
+    const date = Date.now();
+    let currentDate = null;
+
+    do {
+        currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
+}
+
+// Async for each function
+// To loop through the list of teams
+async function asyncForEach(array, callback) {
+
+    for (let index = 0; index < array.length; index++) {
+
+        await callback(array[index], index, array);
+
+    }
+}
+
 
 // Function tests if the link object
 // is a team or not
@@ -35,7 +56,7 @@ async function storeTeams(html) {
 
             let teamName = $(this).text().substr(0, $(this).text().search('Eligible') - 1);
             let teamURLShort = $(this).attr(`href`);
-            let teamURL = `https://gamebattles.majorleaguegaming.com/`+ $(this).attr(`href`);
+            let teamURL = `https://gamebattles.majorleaguegaming.com`+ $(this).attr(`href`);
 
             // Store all the teams in an array
             let team = new t.Team(teamName, teamURL);
@@ -52,6 +73,18 @@ async function storeTeams(html) {
 }
 
 
+// Funciton to store the members of a team
+async function getMembers(html) {
+
+    $('tr', html).each(function() {
+
+        console.log($(this).text());
+
+    });
+
+}
+
+
 // ===============================
 //       Main Async Function
 // ===============================
@@ -60,7 +93,10 @@ async function storeTeams(html) {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
 
-    await page.goto(teamsURL); // Going to the major league gaming website
+    // Going to the major league gaming website
+    await page.goto(teamsURL);
+    
+    sleep(500);
     let bodyHTML = await page.content();
 
     // Was getting a repeat of the same page in the print out
@@ -69,9 +105,25 @@ async function storeTeams(html) {
 
     // Click to the next page of teams
     await page.click('button[aria-label="Next page"]');
+    console.log('\nPage\n')
+
+    // For some reason the await page.content was happening too fast after page.click
+    // So sleep(10(ms)) was added to create a small pause
+    sleep(500);
     bodyHTML = await page.content();
 
     // Storing the second page of teams
     await storeTeams(bodyHTML);
+
+    sleep(500);
+
+    asyncForEach(tournament, async (team) => {
+
+        // Go to the team page and store the HTML
+        await page.goto(team.getURL());
+        bodyHTML = await page.content();
+
+        getMembers(bodyHTML);
+    })
 
 })();
