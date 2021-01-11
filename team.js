@@ -96,9 +96,19 @@ class Team {
             } else {
                 return console.error(`${Bnet} not found in ${this.name}`);
             }
-            
+
         });
 
+    }
+
+    // Getting the team name
+    getName() {
+        return this.name;
+    }
+
+    // Getting the team URL
+    getURL() {
+        return this.url;
     }
 
     // Calculates the avg SR of the whole team (not specific players)

@@ -24,19 +24,11 @@ function isTeam(str) {
 }
 
 
-// ===============================
-//       Main Async Function
-// ===============================
-(async () => {
-
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-
-    await page.goto(teamsURL); // Going to the major league gaming website
-    let bodyHTML = await page.content();
+// Function to store the teams on the webpage
+async function storeTeams(html) {
 
     // Collecting the team names and links to team page on page one
-    $('a', bodyHTML).each(function() {
+    $('a', html).each(function() {
         //console.log($(this).text());
 
         if ( isTeam($(this).text()) ) {
@@ -49,33 +41,37 @@ function isTeam(str) {
             let team = new t.Team(teamName, teamURL);
             tournament.push(team);
             
-            console.log(`1: ${teamName}:\t\t\t${teamURLShort}`);
+            console.log(`${teamName}:\t\t\t${teamURLShort}`);
 
         }
 
     });
+
+    // console.log('\nPage done\n')
+
+}
+
+
+// ===============================
+//       Main Async Function
+// ===============================
+(async () => {
+
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+
+    await page.goto(teamsURL); // Going to the major league gaming website
+    let bodyHTML = await page.content();
+
+    // Was getting a repeat of the same page in the print out
+    // Adding await seemed to have fixed the issue
+    await storeTeams(bodyHTML);
 
     // Click to the next page of teams
     await page.click('button[aria-label="Next page"]');
     bodyHTML = await page.content();
 
-    // Collecting the team names and links to team page on page two
-    $('a', bodyHTML).each(function() {
-
-        if ( isTeam($(this).text()) ) {
-
-            let teamName = $(this).text().substr(0, $(this).text().search('Eligible') - 1);
-            let teamURLShort = $(this).attr(`href`);
-            let teamURL = `https://gamebattles.majorleaguegaming.com/`+ $(this).attr(`href`);
-
-            // Store all the teams in an array
-            let team = new t.Team(teamName, teamURL);
-            tournament.push(team);
-            
-            console.log(`2: ${teamName}:\t\t\t${teamURLShort}`);
-
-        }
-
-    });
+    // Storing the second page of teams
+    await storeTeams(bodyHTML);
 
 })();
