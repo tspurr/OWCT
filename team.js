@@ -82,7 +82,7 @@ class Team {
     // Adding a Team Member
     addMember(name, Bnet) {
         let member = new teamMember(name, Bnet);
-        teamMember.push(member);
+        this.teamMembers.push(member);
     }
 
     // Getting a Team Member

@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 const $ = require('cheerio');
 const { Browser } = require('puppeteer/lib/cjs/puppeteer/common/Browser');
-const teamsURL = 'https://gamebattles.majorleaguegaming.com/pc/overwatch/tournament/fa20-owcc-varsity-series-ms/teams';
+const tournamentURL = 'https://gamebattles.majorleaguegaming.com/pc/overwatch/tournament/fa20-owcc-varsity-series-ms/teams';
 
 var t = require('./team.js'); // Load the team class from team.js
 let tournament = []; // Array of all the teams in the tournament
@@ -74,27 +74,39 @@ async function storeTeams(html) {
 
 
 // Funciton to store the members of a team
-async function getMembers(html) {
+async function storeMembers(team, html) {
+    let count = 0;
 
-    $('tr', html).each(function() {
+    // Getting down to the lowest level to not get clutter within the pull
+    $('tr > td > div > div > div > div', html).each(function() {
+        let BNet = $(this).text(),
+            poundPos = BNet.search('#');
 
-        console.log($(this).text());
+        // Test for # to see if the string is a BNet or not
+        // Can't rely on there being a certain amount of players on each time
+        if(poundPos !== -1) {
+            let name = BNet.substr(0, poundPos);
+            // console.log(name + ' ' + BNet);
+
+            // Adding a player to the Team Object
+            team.addMember(name, BNet);
+        }
 
     });
 
 }
 
 
-// ===============================
-//       Main Async Function
-// ===============================
-(async () => {
+// Main Scrap function that runs the whole file
+// TODO come back and add the website URL as a parameter
+// Allow user to choose what tournament they want
+async function scrape(URL) {
 
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
 
     // Going to the major league gaming website
-    await page.goto(teamsURL);
+    await page.goto(URL);
     
     sleep(500);
     let bodyHTML = await page.content();
@@ -115,15 +127,29 @@ async function getMembers(html) {
     // Storing the second page of teams
     await storeTeams(bodyHTML);
 
+    console.log('\nMember Start\n');
+
     sleep(500);
 
-    asyncForEach(tournament, async (team) => {
+    await asyncForEach(tournament, async (team) => {
 
         // Go to the team page and store the HTML
         await page.goto(team.getURL());
+
+        sleep(500);
+
         bodyHTML = await page.content();
 
-        getMembers(bodyHTML);
+        storeMembers(team, bodyHTML);
     })
 
-})();
+    console.log('All Members Stored');
+
+} // Scrape
+
+
+// ===============================
+//           Main Call
+// ===============================
+
+scrape(tournamentURL);
