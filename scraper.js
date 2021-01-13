@@ -1,9 +1,10 @@
 const puppeteer = require('puppeteer');
 const $ = require('cheerio');
 const { Browser } = require('puppeteer/lib/cjs/puppeteer/common/Browser');
-const tournamentURL = 'https://gamebattles.majorleaguegaming.com/pc/overwatch/tournament/fa20-owcc-varsity-series-ms/teams';
+const t = require('./team.js'); // Load the team class from team.js
+const fs = require('fs');
+const { Module } = require('module');
 
-var t = require('./team.js'); // Load the team class from team.js
 let tournament = []; // Array of all the teams in the tournament
 
 // The sleep function to add a pause when turning a page
@@ -50,19 +51,20 @@ async function storeTeams(html) {
 
     // Collecting the team names and links to team page on page one
     $('a', html).each(function() {
+        let text = $(this).text();
         //console.log($(this).text());
 
-        if ( isTeam($(this).text()) ) {
+        if ( isTeam(text) ) {
 
-            let teamName = $(this).text().substr(0, $(this).text().search('Eligible') - 1);
-            let teamURLShort = $(this).attr(`href`);
-            let teamURL = `https://gamebattles.majorleaguegaming.com`+ $(this).attr(`href`);
+            let teamName = text.substr(0, text.search('Eligible') - 1);
+            let teamHRef = $(this).attr(`href`);
+            let teamURL = `https://gamebattles.majorleaguegaming.com`+ teamHRef;
 
             // Store all the teams in an array
             let team = new t.Team(teamName, teamURL);
             tournament.push(team);
             
-            console.log(`${teamName}:\t\t\t${teamURLShort}`);
+            // console.log(`${teamName}:\t\t\t${teamHRef}`);
 
         }
 
@@ -75,7 +77,6 @@ async function storeTeams(html) {
 
 // Funciton to store the members of a team
 async function storeMembers(team, html) {
-    let count = 0;
 
     // Getting down to the lowest level to not get clutter within the pull
     $('tr > td > div > div > div > div', html).each(function() {
@@ -107,6 +108,7 @@ async function scrape(URL) {
 
     // Going to the major league gaming website
     await page.goto(URL);
+    console.log('Page One');
     
     sleep(500);
     let bodyHTML = await page.content();
@@ -117,7 +119,7 @@ async function scrape(URL) {
 
     // Click to the next page of teams
     await page.click('button[aria-label="Next page"]');
-    console.log('\nPage\n')
+    console.log('Next Page');
 
     // For some reason the await page.content was happening too fast after page.click
     // So sleep(10(ms)) was added to create a small pause
@@ -127,7 +129,7 @@ async function scrape(URL) {
     // Storing the second page of teams
     await storeTeams(bodyHTML);
 
-    console.log('\nMember Start\n');
+    console.log('Member Start');
 
     sleep(500);
 
@@ -145,11 +147,18 @@ async function scrape(URL) {
 
     console.log('All Members Stored');
 
+    let json = JSON.stringify(tournament);
+    
+    // Storing the JSON file of all the teams
+    fs.writeFile("./T3SCraper/Teams.json", json, 'utf8', function (err) {
+        if (err) {
+            return console.log(err);
+        }
+    
+        console.log("The file was saved!");
+    }); 
+
 } // Scrape
 
-
-// ===============================
-//           Main Call
-// ===============================
-
-scrape(tournamentURL);
+// Exporting the Scrape function
+module.exports.scrape = scrape;
