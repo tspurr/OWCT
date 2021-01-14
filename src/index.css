@@ -145,8 +145,17 @@ main {
 @media only screen and (max-width: 600px) {
   .navbar {
     bottom: 0;
+    margin-bottom: 0;
     width: 100vw;
     height: 4rem;
+  }
+
+  .navbar:hover {
+    width: 100vw;
+  }
+
+  .navbar:hover .link-text {
+    display: none;
   }
 
   .logo {
@@ -158,11 +167,13 @@ main {
   }
 
   .nav-link {
+    text-decoration: none;
     justify-content: center;
   }
 
   main {
     margin: 0;
+    padding-bottom: 0;
   }
 
   .nav-hr {
