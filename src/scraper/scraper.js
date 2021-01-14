@@ -4,6 +4,9 @@ const { Browser } = require('puppeteer/lib/cjs/puppeteer/common/Browser');
 const t = require('./team.js'); // Load the team class from team.js
 const fs = require('fs');
 
+// TODO: 
+// Should store teams in an individual array creating team json files instead
+// of one large json file to parse over again and again
 let tournament = []; // Array of all the teams in the tournament
 
 
