@@ -3,9 +3,9 @@ const $ = require('cheerio');
 const { Browser } = require('puppeteer/lib/cjs/puppeteer/common/Browser');
 const t = require('./team.js'); // Load the team class from team.js
 const fs = require('fs');
-const { Module } = require('module');
 
 let tournament = []; // Array of all the teams in the tournament
+
 
 // The sleep function to add a pause when turning a page
 function sleep(milliseconds) {
@@ -16,6 +16,7 @@ function sleep(milliseconds) {
         currentDate = Date.now();
     } while (currentDate - date < milliseconds);
 }
+
 
 // Async for each function
 // To loop through the list of teams
