@@ -3,6 +3,7 @@ const $ = require('cheerio');
 const { Browser } = require('puppeteer/lib/cjs/puppeteer/common/Browser');
 const t = require('./team.js'); // Load the team class from team.js
 const fs = require('fs');
+import {tError, tWarning, show} from './toast';
 
 // TODO: 
 // Should store teams in an individual array creating team json files instead
@@ -123,7 +124,7 @@ async function scrape(URL) {
 
     // Click to the next page of teams
     await page.click('button[aria-label="Next page"]');
-    console.log('Next Page');
+    show('Next Page');
 
     // For some reason the await page.content was happening too fast after page.click
     // So sleep(10(ms)) was added to create a small pause
@@ -133,7 +134,7 @@ async function scrape(URL) {
     // Storing the second page of teams
     await storeTeams(bodyHTML);
 
-    console.log('Member Start');
+    show('Member Start');
 
     sleep(500);
 
@@ -147,20 +148,20 @@ async function scrape(URL) {
         bodyHTML = await page.content();
 
         storeMembers(team, bodyHTML);
+
+        let teamJSON = JSON.stringify(team);
+
+        // Storing the JSON file of all the teams
+        fs.writeFile(`./T3.5Scraper/files/${team.getName()}.json`, teamJSON, 'utf8', function (err) {
+            if (err) {
+                tError(err);
+            }
+    
+        show(`${team.getName()} file stored!`);
+    }); 
     })
 
-    console.log('All Members Stored');
-
-    let json = JSON.stringify(tournament);
-    
-    // Storing the JSON file of all the teams
-    fs.writeFile("./T3SCraper/Teams.json", json, 'utf8', function (err) {
-        if (err) {
-            return console.log(err);
-        }
-    
-        console.log("The file was saved!");
-    }); 
+    show('All Members Stored');
 
 } // Scrape
 

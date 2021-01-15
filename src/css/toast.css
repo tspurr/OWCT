@@ -1,0 +1,34 @@
+.toast-notif {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+
+    max-width: 200px;
+
+    padding: 6px;
+    background-color: azure;
+    color: black;
+    text-align: center;
+    border: 1px solid blue;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+    visibility: hidden;
+    opacity: 0;
+    transition: 200ms;
+}
+
+.toast-notif-vis {
+    bottom: 5px;
+    right: 5px;
+    visibility: visible;
+    opacity: 1;
+}
+
+.toast-warn {
+    border: 1px solid orange;
+}
+
+.toast-err {
+    border: 1px solid red;
+}

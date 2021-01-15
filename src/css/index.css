@@ -89,12 +89,22 @@ main {
   margin: 0 1rem;
 }
 
+.nav-link img {
+  min-width: 1rem;
+  width: 2rem;
+  margin: 0 1rem;
+}
+
 .navbar:hover {
   width: 16rem;
 }
 
 .navbar:hover .link-text {
   display: block;
+}
+
+.navbar:hover .nav-link img {
+  width: 2rem;
 }
 
 .fa-primary {
@@ -145,28 +155,47 @@ main {
 
 .team-main {
   background-color: pink;
-  padding: 1rem;
+  padding: 0;
   height: 70vh;
 }
 
 .team-footer {
   background-color: aqua;
+  border-top: 1px solid white;
   height: 20vh;
-  padding-bottom: 1rem;
 }
 
 .team-disp {
   background-color: aquamarine;
   float: left;
   height: 70vh;
-  width: 70%;
+  width: 69.5%;
+}
+
+.team-drop {
+  background-color: cadetblue;
+  height: 10%;
+  width: 100%;
+}
+
+.team-table {
+  background-color: burlywood;
+  height: 90%;
+  width: 100%;
 }
 
 .team-stats {
   background-color: rgb(232, 238, 175);
+  border-left: 1px solid white;
   float: left;
   height: 70vh;
   width: 30%;
+}
+
+.team-selector {
+  min-width: 10rem;
+  margin-left: 4rem;
+  margin-top: 1rem;
 }
 
 /* Small screens */
@@ -206,5 +235,9 @@ main {
 
   .nav-hr {
     width: 0;
+  }
+
+  .team-main {
+    margin-top: 4rem;
   }
 }
