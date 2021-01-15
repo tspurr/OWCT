@@ -30,13 +30,15 @@ body::-webkit-scrollbar-thumb {
 
 main {
   margin-left: 4rem;
-  padding: 1rem;
+  /*padding: 1rem;*/
 }
 
 .navbar {
   width: 4rem;
   height: 100vh;
   position: fixed;
+  left: 0;
+  top: 0;
   background-color: var(--bg-secondary);
   transition: var(--transition-speed) ease;
 }
@@ -139,6 +141,32 @@ main {
 
 .navbar:hover .nav-hr {
   width: 14rem;
+}
+
+.team-main {
+  background-color: pink;
+  padding: 1rem;
+  height: 70vh;
+}
+
+.team-footer {
+  background-color: aqua;
+  height: 20vh;
+  padding-bottom: 1rem;
+}
+
+.team-disp {
+  background-color: aquamarine;
+  float: left;
+  height: 70vh;
+  width: 70%;
+}
+
+.team-stats {
+  background-color: rgb(232, 238, 175);
+  float: left;
+  height: 70vh;
+  width: 30%;
 }
 
 /* Small screens */

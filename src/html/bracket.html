@@ -5,15 +5,17 @@
     <meta charset="UTF-8">
     <title>Collegiate Overwatch Tracker</title>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <!-- Project Made CSS -->
-    <link rel="stylesheet" href="index.css">
-
-    <!-- Loads the script AFTER html -->
-    <script defer src="./scraper/scraper.js"></script>
+    <link rel="stylesheet" href="../index.css">
 </head>
 
 <body>
@@ -37,7 +39,7 @@
             <hr class="nav-hr">
 
             <li class="nav-item">
-                <a href="index.html" class="nav-link">
+                <a href="../index.html" class="nav-link">
                     <svg width="34" height="32" viewBox="0 0 34 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g class="fa-group">
                             <path class="fa-secondary" fill="currentColor" d="M28.6666 31.6667H5.33325C4.41278 31.6667 3.66659 30.9205 3.66659 30V16.6667H0.333252L15.8199 1.17833C16.1325 0.865364 16.5567 0.689514 16.9991 0.689514C17.4414 0.689514 17.8656 0.865364 18.1783 1.17833L33.6666 16.6667H30.3333V30C30.3333 30.9205 29.5871 31.6667 28.6666 31.6667ZM13.6666 20H20.3333V28.3333H26.9999V14.7133L16.9999 4.71333L6.99992 14.7133V28.3333H13.6666V20Z"/>
@@ -49,7 +51,7 @@
             </li>
 
             <li class="nav-item">
-                <a href="./html/bracket.html" class="nav-link">
+                <a href="./bracket.html" class="nav-link">
                     <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g class="fa-group">
                             <path class="fa-secondary" fill="currentColor" d="M6.99999 33.6666C4.19022 33.666 1.68249 31.9037 0.729827 29.2603C-0.222837 26.617 0.584094 23.6601 2.74743 21.8671C4.91076 20.0741 7.96604 19.83 10.3867 21.2567L21.2567 10.3867C19.5561 7.49752 20.2688 3.79465 22.9203 1.74314C25.5717 -0.308366 29.3349 -0.0686374 31.7046 2.30273C34.0743 4.67411 34.3114 8.43748 32.258 11.0875C30.2046 13.7375 26.5013 14.4475 23.6133 12.745L12.745 23.6133C13.9608 25.6748 13.9783 28.2298 12.7908 30.3077C11.6034 32.3856 9.39326 33.6676 6.99999 33.6666ZM6.99999 23.6667C5.15904 23.6667 3.66666 25.159 3.66666 27C3.66666 28.8409 5.15904 30.3333 6.99999 30.3333C8.84094 30.3333 10.3333 28.8409 10.3333 27C10.3333 25.159 8.84094 23.6667 6.99999 23.6667ZM27 3.66665C25.179 3.6685 23.6965 5.1314 23.6704 6.95222C23.6443 8.77304 25.0843 10.2778 26.9045 10.3318C28.7247 10.3859 30.2514 8.96915 30.3333 7.14998V7.81665V6.99998C30.3333 5.15904 28.8409 3.66665 27 3.66665Z"/>
@@ -61,7 +63,7 @@
             </li>
 
             <li class="nav-item">
-                <a href="./html/info.html" class="nav-link">
+                <a href="./info.html" class="nav-link">
                     <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g class="fa-group">
                             <path class="fa-secondary" fill="currentColor" d="M17 34C7.61116 34 0 26.3888 0 17C0 7.61116 7.61116 0 17 0C26.3888 0 34 7.61116 34 17C33.9897 26.3846 26.3846 33.9897 17 34ZM13.583 15.283V18.7H15.283V25.5H20.417V22.1H18.7L18.717 15.2847L13.583 15.283ZM15.283 8.5V11.9323H18.717V8.5H15.283Z"/>
@@ -89,13 +91,9 @@
     </nav>
 
     <main>
+        <h1>Bracket</h1>
 
-        <div class="team-main">
-            <div class="team-disp"></div>
-            <div class="team-stats"></div>
-        </div>
-
-        <div class="team-footer"></div>
+        <p>This is going to be the main page that holds bracket information</p>
 
     </main>
     
