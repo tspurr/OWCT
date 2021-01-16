@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer');
 const $ = require('cheerio');
 const tankPos = 0, damagePos = 1, supportPos = 2;
+const toast = require('./toast');
 
 
 // ======================================
@@ -29,6 +30,13 @@ class teamMember {
     // Setting Support SR
     support(sr) {
         this.skillRating[supportPos] = sr;
+    }
+
+    // Probably won't use this
+    setSR(tankSR, damageSR, supportSR) {
+        this.skillRating[tankPos] = tankSR;
+        this.skillRating[damagePos] = damageSR;
+        this.skillRating[supportPos] = supportSR;
     }
 
     // Getting the BNet of the member
@@ -88,16 +96,21 @@ class Team {
     // Getting a Team Member
     getMember(Bnet) {
 
+        if(this.teamMembers.length === 0) {
+            return toast.tError(`No Members on ${this.name}`);
+        }
+
         // Look for member in team
         this.teamMembers.forEach(member => {
 
             if(member.getBnet === Bnet) {
+                console.log(`${member.BNet} found in ${this.name}`);
                 return member;
-            } else {
-                return console.error(`${Bnet} not found in ${this.name}`);
             }
 
         });
+
+        return console.error(`${Bnet} not found in ${this.name}`);
 
     }
 

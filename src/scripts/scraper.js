@@ -4,6 +4,7 @@ const t = require('./team.js');
 const fs = require('fs');
 const toast = require('./toast');
 const _ = require('lodash');
+const { url } = require('inspector');
 
 
 let tournament = []; // Array of all the teams in the tournament
@@ -75,13 +76,31 @@ async function storeTeams(html) {
 }
 
 
+async function getMemberSR(member, html) {
+    
+    const tempPage = await browser.newPage();
+    let urlName = member.getName().replace(/#/gi, '-');
+
+    await tempPage.goto(`https://www.overbuff.com/players/pc/${urlName}`);
+    sleep(500);
+    
+    // Collect the HTML
+    let pHTML = await tempPage.content();
+    sleep(500);
+
+    $('tbody > tr > td', pHTML).each(function() {
+        console.log($(this).text());
+    });
+}
+
+
 // Funciton to store the members of a team
 async function storeMembers(team, html) {
 
     // Getting down to the lowest level to not get clutter within the pull
     $('tr > td > div > div > div > div', html).each(function() {
-        let BNet = $(this).text(),
-            poundPos = BNet.search('#');
+        let BNet        = $(this).text(),
+            poundPos    = BNet.search('#');
 
         // Test for # to see if the string is a BNet or not
         // Can't rely on there being a certain amount of players on each time
@@ -117,7 +136,13 @@ async function scrape(URL) {
     await storeTeams(bodyHTML);
 
     // Click to the next page of teams
-    await page.click('button[aria-label="Next page"]');
+    try {
+        await page.click('button[aria-label="Next page"]');
+    } catch (err) {
+        console.log(err); // Keep this console log
+        toast.tError('Please Press the Refresh Button Again!');
+    }
+
     toast.show('Next Page');
 
     // For some reason the await page.content was happening too fast after page.click
