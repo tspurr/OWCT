@@ -1,1 +1,78 @@
-{"name":"Golden Knights","url":"https://gamebattles.majorleaguegaming.com/pc/overwatch/team/34959962","teamMembers":[{"name":"Bort","BNet":"Bort#1354","skillRating":[-1,-1,-1]},{"name":"Bonejangles","BNet":"Bonejangles#11932","skillRating":[-1,-1,-1]},{"name":"BortFan1","BNet":"BortFan1#1474","skillRating":[-1,-1,-1]},{"name":"Clutch","BNet":"Clutch#12501","skillRating":[-1,-1,-1]},{"name":"Marquis","BNet":"Marquis#11347","skillRating":[-1,-1,-1]},{"name":"BortFan2","BNet":"BortFan2#1594","skillRating":[-1,-1,-1]},{"name":"MyPsyche","BNet":"MyPsyche#1287","skillRating":[-1,-1,-1]},{"name":"Crown","BNet":"Crown#11367","skillRating":[-1,-1,-1]}]}
+{
+    "name": "Golden Knights",
+    "url": "https://gamebattles.majorleaguegaming.com/pc/overwatch/team/34959962",
+    "teamMembers": [
+        {
+            "name": "Bort",
+            "BNet": "Bort#1354",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Bonejangles",
+            "BNet": "Bonejangles#11932",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "BortFan1",
+            "BNet": "BortFan1#1474",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Clutch",
+            "BNet": "Clutch#12501",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Marquis",
+            "BNet": "Marquis#11347",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "BortFan2",
+            "BNet": "BortFan2#1594",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "MyPsyche",
+            "BNet": "MyPsyche#1287",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Crown",
+            "BNet": "Crown#11367",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        }
+    ]
+}

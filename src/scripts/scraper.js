@@ -1,14 +1,13 @@
 const puppeteer = require('puppeteer');
 const $ = require('cheerio');
-const { Browser } = require('puppeteer/lib/cjs/puppeteer/common/Browser');
-const t = require('./team.js'); // Load the team class from team.js
+const t = require('./team.js');
 const fs = require('fs');
-import {tError, tWarning, show} from './toast';
+const toast = require('./toast');
+const _ = require('lodash');
 
-// TODO: 
-// Should store teams in an individual array creating team json files instead
-// of one large json file to parse over again and again
+
 let tournament = []; // Array of all the teams in the tournament
+let tournNames = [];
 
 
 // The sleep function to add a pause when turning a page
@@ -57,25 +56,21 @@ async function storeTeams(html) {
     // Collecting the team names and links to team page on page one
     $('a', html).each(function() {
         let text = $(this).text();
-        //console.log($(this).text());
 
         if ( isTeam(text) ) {
 
-            let teamName = text.substr(0, text.search('Eligible') - 1);
-            let teamHRef = $(this).attr(`href`);
-            let teamURL = `https://gamebattles.majorleaguegaming.com`+ teamHRef;
-
-            // Store all the teams in an array
-            let team = new t.Team(teamName, teamURL);
-            tournament.push(team);
+            let holder      = text.substr(0, text.search('Eligible') - 1),
+                teamName    = holder.replace(/\|/gi, ''),
+                teamHRef    = $(this).attr(`href`),
+                teamURL     = `https://gamebattles.majorleaguegaming.com`+ teamHRef,
+                team        = new t.Team(teamName, teamURL);
             
-            // console.log(`${teamName}:\t\t\t${teamHRef}`);
+            tournNames.push(team.getName());
+            tournament.push(team);
 
         }
 
     });
-
-    // console.log('\nPage done\n')
 
 }
 
@@ -92,7 +87,6 @@ async function storeMembers(team, html) {
         // Can't rely on there being a certain amount of players on each time
         if(poundPos !== -1) {
             let name = BNet.substr(0, poundPos);
-            // console.log(name + ' ' + BNet);
 
             // Adding a player to the Team Object
             team.addMember(name, BNet);
@@ -113,7 +107,7 @@ async function scrape(URL) {
 
     // Going to the major league gaming website
     await page.goto(URL);
-    console.log('Page One');
+    toast.show('Page One');
     
     sleep(500);
     let bodyHTML = await page.content();
@@ -124,7 +118,7 @@ async function scrape(URL) {
 
     // Click to the next page of teams
     await page.click('button[aria-label="Next page"]');
-    show('Next Page');
+    toast.show('Next Page');
 
     // For some reason the await page.content was happening too fast after page.click
     // So sleep(10(ms)) was added to create a small pause
@@ -134,7 +128,7 @@ async function scrape(URL) {
     // Storing the second page of teams
     await storeTeams(bodyHTML);
 
-    show('Member Start');
+    toast.show('Member Start');
 
     sleep(500);
 
@@ -149,19 +143,36 @@ async function scrape(URL) {
 
         storeMembers(team, bodyHTML);
 
-        let teamJSON = JSON.stringify(team);
+        let teamJSON = JSON.stringify(team, undefined, 4),
+            teamName = team.getName()
 
-        // Storing the JSON file of all the teams
-        fs.writeFile(`./T3.5Scraper/files/${team.getName()}.json`, teamJSON, 'utf8', function (err) {
-            if (err) {
-                tError(err);
-            }
-    
-        show(`${team.getName()} file stored!`);
-    }); 
+        if(!fs.existsSync(`E:/GitHub/T3.5Scraper/files/${teamName}.json`)) {
+
+            // Storing the JSON file of all the teams
+            fs.writeFile(`./T3.5Scraper/files/${teamName}.json`, teamJSON, 'utf8', function (err) {
+                if (err) {
+                    toast.tError(err);
+                }
+        
+            toast.show(`${teamName} file stored!`);
+        });
+        }
+
     })
 
-    show('All Members Stored');
+    toast.show('Files up to date!');
+
+    // Storing a list of all the teams within the tournament
+    let json = JSON.stringify(tournNames, undefined, 4);
+
+    // Storing the JSON file of all the teams
+    fs.writeFile(`./T3.5Scraper/files/teams.json`, json, 'utf8', function (err) {
+        if (err) {
+            toast.tError(err);
+        }
+
+        toast.show(`team.json stored`);
+    });
 
 } // Scrape
 

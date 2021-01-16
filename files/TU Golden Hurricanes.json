@@ -1,1 +1,87 @@
-{"name":"TU Golden Hurricanes","url":"https://gamebattles.majorleaguegaming.com/pc/overwatch/team/34959584","teamMembers":[{"name":"SirK","BNet":"SirK#1640","skillRating":[-1,-1,-1]},{"name":"Atreides","BNet":"Atreides#11919","skillRating":[-1,-1,-1]},{"name":"FallNutria","BNet":"FallNutria#1521","skillRating":[-1,-1,-1]},{"name":"LilRemington","BNet":"LilRemington#1172","skillRating":[-1,-1,-1]},{"name":"IcIcLe","BNet":"IcIcLe#11374","skillRating":[-1,-1,-1]},{"name":"PopTartZebra","BNet":"PopTartZebra#1946","skillRating":[-1,-1,-1]},{"name":"FortniteKid7","BNet":"FortniteKid7#1693","skillRating":[-1,-1,-1]},{"name":"Rhyno","BNet":"Rhyno#11167","skillRating":[-1,-1,-1]},{"name":"Zepdos","BNet":"Zepdos#1834","skillRating":[-1,-1,-1]}]}
+{
+    "name": "TU Golden Hurricanes",
+    "url": "https://gamebattles.majorleaguegaming.com/pc/overwatch/team/34959584",
+    "teamMembers": [
+        {
+            "name": "SirK",
+            "BNet": "SirK#1640",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Atreides",
+            "BNet": "Atreides#11919",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "FallNutria",
+            "BNet": "FallNutria#1521",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "LilRemington",
+            "BNet": "LilRemington#1172",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "IcIcLe",
+            "BNet": "IcIcLe#11374",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "PopTartZebra",
+            "BNet": "PopTartZebra#1946",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "FortniteKid7",
+            "BNet": "FortniteKid7#1693",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Rhyno",
+            "BNet": "Rhyno#11167",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Zepdos",
+            "BNet": "Zepdos#1834",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        }
+    ]
+}

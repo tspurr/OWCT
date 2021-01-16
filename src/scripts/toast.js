@@ -1,3 +1,4 @@
+
 const toast = {
     init() {
         this.hideTimeout = null;
@@ -44,15 +45,20 @@ const toast = {
 document.addEventListener('DOMContentLoaded', () => toast.init());
 
 function tError(message) {
+    //console.error(message);
     toast.showError(message);
 }
 
 function tWarning(message) {
+    //console.log(message);
     toast.showWarning(message);
 }
 
 function show(message) {
+    //console.log(message);
     toast.show(message);
 }
 
-export {tError, tWarning, show};
+module.exports.tError = tError;
+module.exports.tWarning = tWarning;
+module.exports.show = show;

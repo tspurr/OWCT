@@ -1,1 +1,87 @@
-{"name":"Davenport University Panthers","url":"https://gamebattles.majorleaguegaming.com/pc/overwatch/team/34959961","teamMembers":[{"name":"DuarfS","BNet":"DuarfS#1307","skillRating":[-1,-1,-1]},{"name":"YÅkai","BNet":"YÅkai#11397","skillRating":[-1,-1,-1]},{"name":"kwaH","BNet":"kwaH#11317","skillRating":[-1,-1,-1]},{"name":"DasSchnitzel","BNet":"DasSchnitzel#11466","skillRating":[-1,-1,-1]},{"name":"LukasMagic","BNet":"LukasMagic#1498","skillRating":[-1,-1,-1]},{"name":"Mushy","BNet":"Mushy#11112","skillRating":[-1,-1,-1]},{"name":"OGPan","BNet":"OGPan#1918","skillRating":[-1,-1,-1]},{"name":"Chance","BNet":"Chance#12639","skillRating":[-1,-1,-1]},{"name":"kennybennett","BNet":"kennybennett#1392","skillRating":[-1,-1,-1]}]}
+{
+    "name": "Davenport University Panthers",
+    "url": "https://gamebattles.majorleaguegaming.com/pc/overwatch/team/34959961",
+    "teamMembers": [
+        {
+            "name": "DuarfS",
+            "BNet": "DuarfS#1307",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "YÅkai",
+            "BNet": "YÅkai#11397",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "kwaH",
+            "BNet": "kwaH#11317",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "DasSchnitzel",
+            "BNet": "DasSchnitzel#11466",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "LukasMagic",
+            "BNet": "LukasMagic#1498",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Mushy",
+            "BNet": "Mushy#11112",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "OGPan",
+            "BNet": "OGPan#1918",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Chance",
+            "BNet": "Chance#12639",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "kennybennett",
+            "BNet": "kennybennett#1392",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        }
+    ]
+}

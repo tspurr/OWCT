@@ -240,4 +240,23 @@ main {
   .team-main {
     margin-top: 4rem;
   }
+
+  .team-disp {
+    float: left;
+    height: 70%;
+    width: 100%;
+  }
+
+  .team-stats {
+    border-left: 0;
+    border-top: 1px solid white;
+    float: left;
+    height: 30%;
+    width: 100%;
+  }
+
+  .team-drop {
+    align-content: center;
+    padding-bottom: 12px;
+  }
 }

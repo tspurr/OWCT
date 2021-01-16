@@ -1,1 +1,96 @@
-{"name":"BSCBobcatsVA","url":"https://gamebattles.majorleaguegaming.com/pc/overwatch/team/34959625","teamMembers":[{"name":"Empress7CG","BNet":"Empress7CG#1957","skillRating":[-1,-1,-1]},{"name":"ColeTheCrazy","BNet":"ColeTheCrazy#11756","skillRating":[-1,-1,-1]},{"name":"EchoZenpai","BNet":"EchoZenpai#1575","skillRating":[-1,-1,-1]},{"name":"Fabian","BNet":"Fabian#11755","skillRating":[-1,-1,-1]},{"name":"Gordup","BNet":"Gordup#1582","skillRating":[-1,-1,-1]},{"name":"Lyonhawk","BNet":"Lyonhawk#2287","skillRating":[-1,-1,-1]},{"name":"Sxismic","BNet":"Sxismic#1549","skillRating":[-1,-1,-1]},{"name":"narwhal","BNet":"narwhal#11760","skillRating":[-1,-1,-1]},{"name":"obl","BNet":"obl#11482","skillRating":[-1,-1,-1]},{"name":"tutsuo","BNet":"tutsuo#11781","skillRating":[-1,-1,-1]}]}
+{
+    "name": "BSCBobcatsVA",
+    "url": "https://gamebattles.majorleaguegaming.com/pc/overwatch/team/34959625",
+    "teamMembers": [
+        {
+            "name": "Empress7CG",
+            "BNet": "Empress7CG#1957",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "ColeTheCrazy",
+            "BNet": "ColeTheCrazy#11756",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "EchoZenpai",
+            "BNet": "EchoZenpai#1575",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Fabian",
+            "BNet": "Fabian#11755",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Gordup",
+            "BNet": "Gordup#1582",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Lyonhawk",
+            "BNet": "Lyonhawk#2287",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Sxismic",
+            "BNet": "Sxismic#1549",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "narwhal",
+            "BNet": "narwhal#11760",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "obl",
+            "BNet": "obl#11482",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "tutsuo",
+            "BNet": "tutsuo#11781",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        }
+    ]
+}

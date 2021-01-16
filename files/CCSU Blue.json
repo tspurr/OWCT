@@ -1,1 +1,87 @@
-{"name":"CCSU Blue","url":"https://gamebattles.majorleaguegaming.com/pc/overwatch/team/34959592","teamMembers":[{"name":"Glitch","BNet":"Glitch#12503","skillRating":[-1,-1,-1]},{"name":"Evolution","BNet":"Evolution#11912","skillRating":[-1,-1,-1]},{"name":"CPCTCG","BNet":"CPCTCG#1835","skillRating":[-1,-1,-1]},{"name":"DrFill","BNet":"DrFill#11791","skillRating":[-1,-1,-1]},{"name":"EÇS","BNet":"EÇS#1740","skillRating":[-1,-1,-1]},{"name":"EzilyAmuzed","BNet":"EzilyAmuzed#11631","skillRating":[-1,-1,-1]},{"name":"IamTheLiquor","BNet":"IamTheLiquor#11371","skillRating":[-1,-1,-1]},{"name":"TheBigJuice","BNet":"TheBigJuice#11906","skillRating":[-1,-1,-1]},{"name":"garbo","BNet":"garbo#12673","skillRating":[-1,-1,-1]}]}
+{
+    "name": "CCSU Blue",
+    "url": "https://gamebattles.majorleaguegaming.com/pc/overwatch/team/34959592",
+    "teamMembers": [
+        {
+            "name": "Glitch",
+            "BNet": "Glitch#12503",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Evolution",
+            "BNet": "Evolution#11912",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "CPCTCG",
+            "BNet": "CPCTCG#1835",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "DrFill",
+            "BNet": "DrFill#11791",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "EÇS",
+            "BNet": "EÇS#1740",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "EzilyAmuzed",
+            "BNet": "EzilyAmuzed#11631",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "IamTheLiquor",
+            "BNet": "IamTheLiquor#11371",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "TheBigJuice",
+            "BNet": "TheBigJuice#11906",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "garbo",
+            "BNet": "garbo#12673",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        }
+    ]
+}

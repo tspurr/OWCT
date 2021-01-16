@@ -1,1 +1,69 @@
-{"name":"Ottawa Braves Esports","url":"https://gamebattles.majorleaguegaming.com/pc/overwatch/team/34959593","teamMembers":[{"name":"Tubesock","BNet":"Tubesock#1425","skillRating":[-1,-1,-1]},{"name":"Beach","BNet":"Beach#11521","skillRating":[-1,-1,-1]},{"name":"Chance3455","BNet":"Chance3455#1441","skillRating":[-1,-1,-1]},{"name":"Meliodas","BNet":"Meliodas#15193","skillRating":[-1,-1,-1]},{"name":"Chrono","BNet":"Chrono#12504","skillRating":[-1,-1,-1]},{"name":"Taco","BNet":"Taco#13548","skillRating":[-1,-1,-1]},{"name":"Zilliek","BNet":"Zilliek#1933","skillRating":[-1,-1,-1]}]}
+{
+    "name": "Ottawa Braves Esports",
+    "url": "https://gamebattles.majorleaguegaming.com/pc/overwatch/team/34959593",
+    "teamMembers": [
+        {
+            "name": "Tubesock",
+            "BNet": "Tubesock#1425",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Beach",
+            "BNet": "Beach#11521",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Chance3455",
+            "BNet": "Chance3455#1441",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Meliodas",
+            "BNet": "Meliodas#15193",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Chrono",
+            "BNet": "Chrono#12504",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Taco",
+            "BNet": "Taco#13548",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Zilliek",
+            "BNet": "Zilliek#1933",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        }
+    ]
+}

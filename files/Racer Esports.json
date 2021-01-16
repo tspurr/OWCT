@@ -1,1 +1,78 @@
-{"name":"Racer Esports","url":"https://gamebattles.majorleaguegaming.com/pc/overwatch/team/34959594","teamMembers":[{"name":"Papa","BNet":"Papa#12917","skillRating":[-1,-1,-1]},{"name":"ahnhur","BNet":"ahnhur#1895","skillRating":[-1,-1,-1]},{"name":"Bonzaituna","BNet":"Bonzaituna#1762","skillRating":[-1,-1,-1]},{"name":"Brostradamu","BNet":"Brostradamu#1441","skillRating":[-1,-1,-1]},{"name":"DirtyPaws","BNet":"DirtyPaws#11435","skillRating":[-1,-1,-1]},{"name":"FlavFilth","BNet":"FlavFilth#1911","skillRating":[-1,-1,-1]},{"name":"LaggyLoot","BNet":"LaggyLoot#1561","skillRating":[-1,-1,-1]},{"name":"MSUunsainted","BNet":"MSUunsainted#1473","skillRating":[-1,-1,-1]}]}
+{
+    "name": "Racer Esports",
+    "url": "https://gamebattles.majorleaguegaming.com/pc/overwatch/team/34959594",
+    "teamMembers": [
+        {
+            "name": "Papa",
+            "BNet": "Papa#12917",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "ahnhur",
+            "BNet": "ahnhur#1895",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Bonzaituna",
+            "BNet": "Bonzaituna#1762",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Brostradamu",
+            "BNet": "Brostradamu#1441",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "DirtyPaws",
+            "BNet": "DirtyPaws#11435",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "FlavFilth",
+            "BNet": "FlavFilth#1911",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "LaggyLoot",
+            "BNet": "LaggyLoot#1561",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "MSUunsainted",
+            "BNet": "MSUunsainted#1473",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        }
+    ]
+}

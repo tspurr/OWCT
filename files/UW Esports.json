@@ -1,1 +1,87 @@
-{"name":"UW Esports","url":"https://gamebattles.majorleaguegaming.com/pc/overwatch/team/34959602","teamMembers":[{"name":"Naethros","BNet":"Naethros#1961","skillRating":[-1,-1,-1]},{"name":"Magz","BNet":"Magz#11119","skillRating":[-1,-1,-1]},{"name":"MadCALDiseaz","BNet":"MadCALDiseaz#1995","skillRating":[-1,-1,-1]},{"name":"Platypus","BNet":"Platypus#1707","skillRating":[-1,-1,-1]},{"name":"Qwandry","BNet":"Qwandry#1957","skillRating":[-1,-1,-1]},{"name":"SME","BNet":"SME#11813","skillRating":[-1,-1,-1]},{"name":"StealthNinja","BNet":"StealthNinja#1591","skillRating":[-1,-1,-1]},{"name":"Tribiab","BNet":"Tribiab#1174","skillRating":[-1,-1,-1]},{"name":"Typo","BNet":"Typo#1924","skillRating":[-1,-1,-1]}]}
+{
+    "name": "UW Esports",
+    "url": "https://gamebattles.majorleaguegaming.com/pc/overwatch/team/34959602",
+    "teamMembers": [
+        {
+            "name": "Naethros",
+            "BNet": "Naethros#1961",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Magz",
+            "BNet": "Magz#11119",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "MadCALDiseaz",
+            "BNet": "MadCALDiseaz#1995",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Platypus",
+            "BNet": "Platypus#1707",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Qwandry",
+            "BNet": "Qwandry#1957",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "SME",
+            "BNet": "SME#11813",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "StealthNinja",
+            "BNet": "StealthNinja#1591",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Tribiab",
+            "BNet": "Tribiab#1174",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Typo",
+            "BNet": "Typo#1924",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        }
+    ]
+}

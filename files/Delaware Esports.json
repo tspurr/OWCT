@@ -1,1 +1,87 @@
-{"name":"Delaware Esports","url":"https://gamebattles.majorleaguegaming.com/pc/overwatch/team/34959567","teamMembers":[{"name":"m1lk","BNet":"m1lk#11547","skillRating":[-1,-1,-1]},{"name":"Lean","BNet":"Lean#12681","skillRating":[-1,-1,-1]},{"name":"BBBBBBBBBBBB","BNet":"BBBBBBBBBBBB#11422","skillRating":[-1,-1,-1]},{"name":"Burnout","BNet":"Burnout#11554","skillRating":[-1,-1,-1]},{"name":"Ice","BNet":"Ice#14554","skillRating":[-1,-1,-1]},{"name":"Pod36000","BNet":"Pod36000#1981","skillRating":[-1,-1,-1]},{"name":"Rancerxl","BNet":"Rancerxl#1417","skillRating":[-1,-1,-1]},{"name":"nate","BNet":"nate#14213","skillRating":[-1,-1,-1]},{"name":"TubChub","BNet":"TubChub#1358","skillRating":[-1,-1,-1]}]}
+{
+    "name": "Delaware Esports",
+    "url": "https://gamebattles.majorleaguegaming.com/pc/overwatch/team/34959567",
+    "teamMembers": [
+        {
+            "name": "m1lk",
+            "BNet": "m1lk#11547",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Lean",
+            "BNet": "Lean#12681",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "BBBBBBBBBBBB",
+            "BNet": "BBBBBBBBBBBB#11422",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Burnout",
+            "BNet": "Burnout#11554",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Ice",
+            "BNet": "Ice#14554",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Pod36000",
+            "BNet": "Pod36000#1981",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Rancerxl",
+            "BNet": "Rancerxl#1417",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "nate",
+            "BNet": "nate#14213",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "TubChub",
+            "BNet": "TubChub#1358",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        }
+    ]
+}

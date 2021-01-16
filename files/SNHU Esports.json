@@ -1,1 +1,60 @@
-{"name":"SNHU Esports","url":"https://gamebattles.majorleaguegaming.com/pc/overwatch/team/34959959","teamMembers":[{"name":"Shinra","BNet":"Shinra#11348","skillRating":[-1,-1,-1]},{"name":"Dananana","BNet":"Dananana#11111","skillRating":[-1,-1,-1]},{"name":"Rhino","BNet":"Rhino#12433","skillRating":[-1,-1,-1]},{"name":"StyxEternal","BNet":"StyxEternal#1916","skillRating":[-1,-1,-1]},{"name":"Weasy","BNet":"Weasy#11558","skillRating":[-1,-1,-1]},{"name":"pepto","BNet":"pepto#11535","skillRating":[-1,-1,-1]}]}
+{
+    "name": "SNHU Esports",
+    "url": "https://gamebattles.majorleaguegaming.com/pc/overwatch/team/34959959",
+    "teamMembers": [
+        {
+            "name": "Shinra",
+            "BNet": "Shinra#11348",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Dananana",
+            "BNet": "Dananana#11111",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Rhino",
+            "BNet": "Rhino#12433",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "StyxEternal",
+            "BNet": "StyxEternal#1916",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Weasy",
+            "BNet": "Weasy#11558",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "pepto",
+            "BNet": "pepto#11535",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        }
+    ]
+}

@@ -1,1 +1,60 @@
-{"name":"Hocking College Hawks","url":"https://gamebattles.majorleaguegaming.com/pc/overwatch/team/34959620","teamMembers":[{"name":"Humboldt","BNet":"Humboldt#11710","skillRating":[-1,-1,-1]},{"name":"Buckeye","BNet":"Buckeye#11423","skillRating":[-1,-1,-1]},{"name":"Dyl216","BNet":"Dyl216#1173","skillRating":[-1,-1,-1]},{"name":"septicdark","BNet":"septicdark#1755","skillRating":[-1,-1,-1]},{"name":"snorty","BNet":"snorty#11243","skillRating":[-1,-1,-1]},{"name":"tbone8015","BNet":"tbone8015#1965","skillRating":[-1,-1,-1]}]}
+{
+    "name": "Hocking College Hawks",
+    "url": "https://gamebattles.majorleaguegaming.com/pc/overwatch/team/34959620",
+    "teamMembers": [
+        {
+            "name": "Humboldt",
+            "BNet": "Humboldt#11710",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Buckeye",
+            "BNet": "Buckeye#11423",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Dyl216",
+            "BNet": "Dyl216#1173",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "septicdark",
+            "BNet": "septicdark#1755",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "snorty",
+            "BNet": "snorty#11243",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "tbone8015",
+            "BNet": "tbone8015#1965",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        }
+    ]
+}

@@ -1,1 +1,78 @@
-{"name":"StMU Varsity Esports","url":"https://gamebattles.majorleaguegaming.com/pc/overwatch/team/34959867","teamMembers":[{"name":"Ironknee","BNet":"Ironknee#11907","skillRating":[-1,-1,-1]},{"name":"Dougiee","BNet":"Dougiee#11617","skillRating":[-1,-1,-1]},{"name":"Dezzick","BNet":"Dezzick#11144","skillRating":[-1,-1,-1]},{"name":"Mikey2808","BNet":"Mikey2808#1278","skillRating":[-1,-1,-1]},{"name":"SCRODEX","BNet":"SCRODEX#1195","skillRating":[-1,-1,-1]},{"name":"Senju","BNet":"Senju#11532","skillRating":[-1,-1,-1]},{"name":"MarcGarc","BNet":"MarcGarc#11373","skillRating":[-1,-1,-1]},{"name":"sonono","BNet":"sonono#1358","skillRating":[-1,-1,-1]}]}
+{
+    "name": "StMU Varsity Esports",
+    "url": "https://gamebattles.majorleaguegaming.com/pc/overwatch/team/34959867",
+    "teamMembers": [
+        {
+            "name": "Ironknee",
+            "BNet": "Ironknee#11907",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Dougiee",
+            "BNet": "Dougiee#11617",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Dezzick",
+            "BNet": "Dezzick#11144",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Mikey2808",
+            "BNet": "Mikey2808#1278",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "SCRODEX",
+            "BNet": "SCRODEX#1195",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Senju",
+            "BNet": "Senju#11532",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "MarcGarc",
+            "BNet": "MarcGarc#11373",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "sonono",
+            "BNet": "sonono#1358",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        }
+    ]
+}

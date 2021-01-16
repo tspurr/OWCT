@@ -1,1 +1,114 @@
-{"name":"NIU Esports","url":"https://gamebattles.majorleaguegaming.com/pc/overwatch/team/34959559","teamMembers":[{"name":"Frosty","BNet":"Frosty#14523","skillRating":[-1,-1,-1]},{"name":"HyDRo","BNet":"HyDRo#12377","skillRating":[-1,-1,-1]},{"name":"Foxish","BNet":"Foxish#11442","skillRating":[-1,-1,-1]},{"name":"Moses","BNet":"Moses#12327","skillRating":[-1,-1,-1]},{"name":"NightRaven","BNet":"NightRaven#1119738","skillRating":[-1,-1,-1]},{"name":"SeanBoyQ","BNet":"SeanBoyQ#1953","skillRating":[-1,-1,-1]},{"name":"Vii","BNet":"Vii#11654","skillRating":[-1,-1,-1]},{"name":"Yoshimitsu","BNet":"Yoshimitsu#11277","skillRating":[-1,-1,-1]},{"name":"Zebo","BNet":"Zebo#11346","skillRating":[-1,-1,-1]},{"name":"ifurgat","BNet":"ifurgat#1365","skillRating":[-1,-1,-1]},{"name":"misu","BNet":"misu#11430","skillRating":[-1,-1,-1]},{"name":"Tokotoro","BNet":"Tokotoro#1818","skillRating":[-1,-1,-1]}]}
+{
+    "name": "NIU Esports",
+    "url": "https://gamebattles.majorleaguegaming.com/pc/overwatch/team/34959559",
+    "teamMembers": [
+        {
+            "name": "Frosty",
+            "BNet": "Frosty#14523",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "HyDRo",
+            "BNet": "HyDRo#12377",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Foxish",
+            "BNet": "Foxish#11442",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Moses",
+            "BNet": "Moses#12327",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "NightRaven",
+            "BNet": "NightRaven#1119738",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "SeanBoyQ",
+            "BNet": "SeanBoyQ#1953",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Vii",
+            "BNet": "Vii#11654",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Yoshimitsu",
+            "BNet": "Yoshimitsu#11277",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Zebo",
+            "BNet": "Zebo#11346",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "ifurgat",
+            "BNet": "ifurgat#1365",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "misu",
+            "BNet": "misu#11430",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Tokotoro",
+            "BNet": "Tokotoro#1818",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        }
+    ]
+}

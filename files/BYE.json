@@ -1,1 +1,105 @@
-{"name":"BYE","url":"https://gamebattles.majorleaguegaming.com/pc/overwatch/team/34959970","teamMembers":[{"name":"GuataRican","BNet":"GuataRican#1680","skillRating":[-1,-1,-1]},{"name":"AKI","BNet":"AKI#12261","skillRating":[-1,-1,-1]},{"name":"ChimpExC","BNet":"ChimpExC#1310","skillRating":[-1,-1,-1]},{"name":"Hailstone","BNet":"Hailstone#11246","skillRating":[-1,-1,-1]},{"name":"Iyona","BNet":"Iyona#11394","skillRating":[-1,-1,-1]},{"name":"NeoTech52","BNet":"NeoTech52#1820","skillRating":[-1,-1,-1]},{"name":"SYKtkd","BNet":"SYKtkd#1697","skillRating":[-1,-1,-1]},{"name":"Silversaint","BNet":"Silversaint#11931","skillRating":[-1,-1,-1]},{"name":"Xelot","BNet":"Xelot#11651","skillRating":[-1,-1,-1]},{"name":"stancho44","BNet":"stancho44#1405","skillRating":[-1,-1,-1]},{"name":"destro","BNet":"destro#12496","skillRating":[-1,-1,-1]}]}
+{
+    "name": "BYE",
+    "url": "https://gamebattles.majorleaguegaming.com/pc/overwatch/team/34959970",
+    "teamMembers": [
+        {
+            "name": "GuataRican",
+            "BNet": "GuataRican#1680",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "AKI",
+            "BNet": "AKI#12261",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "ChimpExC",
+            "BNet": "ChimpExC#1310",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Hailstone",
+            "BNet": "Hailstone#11246",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Iyona",
+            "BNet": "Iyona#11394",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "NeoTech52",
+            "BNet": "NeoTech52#1820",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "SYKtkd",
+            "BNet": "SYKtkd#1697",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Silversaint",
+            "BNet": "Silversaint#11931",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Xelot",
+            "BNet": "Xelot#11651",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "stancho44",
+            "BNet": "stancho44#1405",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "destro",
+            "BNet": "destro#12496",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        }
+    ]
+}

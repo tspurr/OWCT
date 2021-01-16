@@ -1,1 +1,96 @@
-{"name":"Ashland University","url":"https://gamebattles.majorleaguegaming.com/pc/overwatch/team/34959595","teamMembers":[{"name":"QuitBadgerin","BNet":"QuitBadgerin#1850","skillRating":[-1,-1,-1]},{"name":"CavCrow","BNet":"CavCrow#11594","skillRating":[-1,-1,-1]},{"name":"CheesyDance","BNet":"CheesyDance#1285","skillRating":[-1,-1,-1]},{"name":"Keiran74","BNet":"Keiran74#1686","skillRating":[-1,-1,-1]},{"name":"Memes","BNet":"Memes#11186","skillRating":[-1,-1,-1]},{"name":"Revalia","BNet":"Revalia#11402","skillRating":[-1,-1,-1]},{"name":"Skiis","BNet":"Skiis#11945","skillRating":[-1,-1,-1]},{"name":"Tea","BNet":"Tea#1337","skillRating":[-1,-1,-1]},{"name":"ajint56","BNet":"ajint56#1829","skillRating":[-1,-1,-1]},{"name":"Early","BNet":"Early#11753","skillRating":[-1,-1,-1]}]}
+{
+    "name": "Ashland University",
+    "url": "https://gamebattles.majorleaguegaming.com/pc/overwatch/team/34959595",
+    "teamMembers": [
+        {
+            "name": "QuitBadgerin",
+            "BNet": "QuitBadgerin#1850",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "CavCrow",
+            "BNet": "CavCrow#11594",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "CheesyDance",
+            "BNet": "CheesyDance#1285",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Keiran74",
+            "BNet": "Keiran74#1686",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Memes",
+            "BNet": "Memes#11186",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Revalia",
+            "BNet": "Revalia#11402",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Skiis",
+            "BNet": "Skiis#11945",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Tea",
+            "BNet": "Tea#1337",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "ajint56",
+            "BNet": "ajint56#1829",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Early",
+            "BNet": "Early#11753",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        }
+    ]
+}
