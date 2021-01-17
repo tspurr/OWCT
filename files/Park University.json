@@ -1,5 +1,87 @@
 {
     "name": "Park University",
     "url": "https://gamebattles.majorleaguegaming.com/pc/overwatch/team/34959601",
-    "teamMembers": []
+    "teamMembers": [
+        {
+            "name": "AJOfTheYear",
+            "BNet": "AJOfTheYear#1611",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Floofy",
+            "BNet": "Floofy#11845",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Macarina",
+            "BNet": "Macarina#1169",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Merciless",
+            "BNet": "Merciless#11340",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Six",
+            "BNet": "Six#11887",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "SlyMcwilliam",
+            "BNet": "SlyMcwilliam#1166",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Tornath",
+            "BNet": "Tornath#11975",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "gO0n",
+            "BNet": "gO0n#11580",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Poisonberry7",
+            "BNet": "Poisonberry7#1150",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        }
+    ]
 }

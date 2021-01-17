@@ -1,5 +1,78 @@
 {
     "name": "FHSU Varsity",
     "url": "https://gamebattles.majorleaguegaming.com/pc/overwatch/team/34959562",
-    "teamMembers": []
+    "teamMembers": [
+        {
+            "name": "Vynaraz",
+            "BNet": "Vynaraz#1768",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Flem",
+            "BNet": "Flem#11528",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "BIGNICK316",
+            "BNet": "BIGNICK316#1826",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "DrPlagueWell",
+            "BNet": "DrPlagueWell#1199",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Litebrite",
+            "BNet": "Litebrite#1604",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Kat",
+            "BNet": "Kat#13277",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "watanabenico",
+            "BNet": "watanabenico#1813",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "medz",
+            "BNet": "medz#11399",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        }
+    ]
 }

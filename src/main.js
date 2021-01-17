@@ -1,6 +1,5 @@
-const scraper = require('./scripts/scraper.js');
-const refreshBtn = document.getElementById('refreshBtn');
-const $ = require('jQuery');
+const scraper       = require('./scripts/scraper.js');
+const refreshBtn    = document.getElementById('refreshBtn');
 
 
 // Was already run and the teams were stored

@@ -1,5 +1,96 @@
 {
     "name": "Lebanon Valley College",
     "url": "https://gamebattles.majorleaguegaming.com/pc/overwatch/team/34959603",
-    "teamMembers": []
+    "teamMembers": [
+        {
+            "name": "BigPescado",
+            "BNet": "BigPescado#1562",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Bdawg",
+            "BNet": "Bdawg#11464",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "CocoBear",
+            "BNet": "CocoBear#11996",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "TheBossBaby",
+            "BNet": "TheBossBaby#1364",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Grok",
+            "BNet": "Grok#11640",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "LMM",
+            "BNet": "LMM#11860",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Muterbuter",
+            "BNet": "Muterbuter#1248",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Seki",
+            "BNet": "Seki#11514",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Silence",
+            "BNet": "Silence#13515",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        },
+        {
+            "name": "Tereto",
+            "BNet": "Tereto#11712",
+            "skillRating": [
+                -1,
+                -1,
+                -1
+            ]
+        }
+    ]
 }
