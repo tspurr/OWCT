@@ -130,10 +130,10 @@
                     <table>
                         <thead>
                             <tr class=".team-table-header">
-                                <td>BNet</td>
-                                <td class="table-right">Tank</td>
-                                <td class="table-right">Damage</td>
-                                <td class="table-right">Support</td>
+                                <td style="border-bottom: 1px solid white;">BNet</td>
+                                <td style="border-bottom: 1px solid white;" class="table-right">Tank</td>
+                                <td style="border-bottom: 1px solid white;" class="table-right">Damage</td>
+                                <td style="border-bottom: 1px solid white;" class="table-right">Support</td>
                             </tr>
                         </thead>
                         <tbody id="teamTable">
@@ -141,7 +141,7 @@
                     </table>
 
                     <!--Should refresh the team's SR and reload the table-->
-                    <button id="refreshTeamTable" class="team-table-refresh">Refresh</button>
+                    <button id="refreshTeamTable" class="team-table-refresh" onclick="refreshTeamSR()">Refresh</button>
 
                 </div>
 

@@ -1,7 +1,7 @@
-const scraper   = require('./scripts/scraper.js');
-const database  = require('./database/functions');
-const mongoose  = require('./database/database');
-const Tournament = require('./database/models/tournament.js');
+const scraper           = require('./scripts/scraper.js');
+const database          = require('./database/functions');
+const mongoose          = require('./database/database');
+const overbuff          = require('./scripts/overbuff');
 
 const tournamentName    = 'fa20-owcc-varsity-series-ms';
 let selectTeam          = document.getElementById('teamMenu');
@@ -46,6 +46,7 @@ async function refreshTeams() {
         selectTeam.appendChild(el);
 
     }
+
 }
 
 
@@ -54,25 +55,44 @@ async function refreshTeams() {
 // the table
 async function loadTeamTable(teamName) {
 
+    // Set the table back to nothing
+    teamTableBody.innerHTML = '';
+
     if(teamName === 'Select a Team')
         return;
 
-    let team = await database.getTeamN(teamName, tournamentName);
+    let team    = await database.getTeamN(teamName, tournamentName);
     let members = team.members;
 
+    // Loop thorugh the members on the team and store the rel. information
     for(var i = 0; i < members.length; i++) {
 
-        let row         = document.createElement('tr');
+        let row = document.createElement('tr');
         
         row.innerHTML = 
            `<td>${members[i].BNet}</td>
-            <td class=".table-right">${members[i].SR['Tank']}</td>
-            <td class=".table-right">${members[i].SR['Damage']}</td>
-            <td class=".table-right">${members[i].SR['Support']}</td>`;
+            <td class="table-right">${members[i].SR['Tank']}</td>
+            <td class="table-right">${members[i].SR['Damage']}</td>
+            <td class="table-right">${members[i].SR['Support']}</td>`;
 
         teamTableBody.appendChild(row);
 
     }
+
+}
+
+
+// ==================================
+//     Refresh Team Skill Ratings
+// ==================================
+async function refreshTeamSR() {
+
+    let team = selectTeam.value;
+
+    await overbuff.getAllMemberSR(team, tournamentName);
+
+    loadTeamTable(team);
+
 }
 
 

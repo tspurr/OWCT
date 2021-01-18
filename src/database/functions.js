@@ -55,7 +55,7 @@ async function getTeamN(teamName, tournament) {
 async function updateTeam(team, tournament) {
 
     let db = mongoose.connection.collection(tournament);
-    let data = getTeam(team, tournament);
+    let data = getTeam(team._id, tournament);
 
     if(_.isEqual(team, data)) {
         return console.log(`${team._id} not updated, files were the same`);

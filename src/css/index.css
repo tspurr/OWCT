@@ -163,43 +163,38 @@ main {
           Home Page
 #############################*/
 .team-main {
-  background-color: pink;
+  /* background-color: pink; */
+  position: relative;
   padding: 0;
   height: 70vh;
 }
 
 .team-footer {
-  background-color: aqua;
+  /* background-color: aqua; */
   position: relative;
   border-top: 1px solid white;
   height: 20vh;
 }
 
 .team-disp {
-  background-color: aquamarine;
-  float: left;
-  height: 70vh;
-  width: 69.5%;
+  /* background-color: aquamarine; */
+  position: absolute;
+  height: 100%;
+  width: 70%;
 }
 
 .team-drop {
   position: relative;
-  background-color: cadetblue;
+  /* background-color: cadetblue; */
   height: 10%;
   width: 100%;
 }
 
-.team-table {
-  background-color: burlywood;
-  position: relative;
-  height: 90%;
-  width: 100%;
-}
-
 .team-stats {
-  background-color: rgb(232, 238, 175);
+  /* background-color: rgb(232, 238, 175); */
   border-left: 1px solid white;
-  float: left;
+  float: right;
+  position: relative;
   height: 70vh;
   width: 30%;
 }
@@ -227,26 +222,51 @@ table {
   border-collapse: separate;
   box-sizing: border-box;
   text-indent: initial;
-  border-spacing: 2px;
+  border-spacing: 0;
   border-color: rgb(0, 0, 0);
-  overflow: scroll;
 }
 
 tr {
-  background-color: blueviolet;
+  /* background-color: blueviolet; */
 }
 
 td {
-  background-color: darkblue;
+  /*background-color: darkblue;*/
   width: 25%;
+  border-right: 1px solid white;
+  padding-right: 3px;
+}
+
+.team-table {
+  /* background-color: burlywood; */
+  position: relative;
+  height: 90%;
+  width: 100%;
+  overflow: scroll;
+}
+
+.team-table::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+.team-table::-webkit-scrollbar-track {
+  background: none;
+}
+
+.team-table::-webkit-scrollbar-thumb {
+  background: purple;
+}
+
+.team-table::-webkit-scrollbar-button {
+  width: 0;
 }
 
 .team-table-header {
   display: table-header-group;
-  border: inherit;
 }
 
 .table-right {
+  border-right: 0;
   position: relative;
   text-align: center;
 }
@@ -304,7 +324,7 @@ td {
   }
 
   .team-disp {
-    float: left;
+    position: relative;
     height: 70%;
     width: 100%;
   }
@@ -312,7 +332,7 @@ td {
   .team-stats {
     border-left: 0;
     border-top: 1px solid white;
-    float: left;
+    float: bottom;
     height: 30%;
     width: 100%;
   }
