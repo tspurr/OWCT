@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const dbURI = 'mongodb+srv://scraper:scraper4321@tespascraper.ybn4s.mongodb.net/Tespa?retryWrites=true&w=majority'
+const config = require('../config');
+const dbURI = config.mongoURI;
 
 module.exports = {
     init: () => {
