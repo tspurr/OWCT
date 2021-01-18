@@ -7,5 +7,15 @@ module.exports = {
         url: "",
 
         members: []
+    },
+
+    // The default tournament document
+    defaultTourn: {
+        _id: "",
+        name: "",
+        url: "",
+
+        teams: []
     }
+    
 };

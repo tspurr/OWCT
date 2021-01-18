@@ -3,10 +3,8 @@ const $         = require('cheerio');
 const toast     = require('./toast');
 const _         = require('lodash');
 
-// Mongoose Variables
-const mongoose          = require('../database/database');
-      mongoose.init();
 const Team              = require('../database/models/team');
+const Tournament        = require('../database/models/tournament');
 const database          = require('../database/functions');
 
 
@@ -149,7 +147,7 @@ async function storeTeams(html) {
 // =============================================
 //             Main Scrape Function
 // =============================================
-async function scrape(URL) {
+async function scrapeAll(URL) {
 
     const browser   = await puppeteer.launch();
     const page      = await browser.newPage();
@@ -181,7 +179,18 @@ async function scrape(URL) {
     // Storing the second page of teams
     await storeTeams(bodyHTML);
 
-    toast.show('teams stored')
+    toast.show('teams stored');
+
+    // Defining the tournament and uploading to the database
+    const tournament = new Tournament({
+        _id:    tournURL[tournPos],
+        name:   tournURL[tournPos],
+        url:    URL,
+
+        teams: tournNames
+    });
+
+    database.uploadTournInfo(tournament);
 
     asyncForEach(tournNames, async (team) => {
 
@@ -202,5 +211,5 @@ async function scrape(URL) {
 
 } // Scrape
 
-// Exporting the Scrape function
-module.exports.scrape = scrape;
+// Exporting
+module.exports = {scrapeAll};

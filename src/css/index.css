@@ -161,6 +161,7 @@ main {
 
 .team-footer {
   background-color: aqua;
+  position: relative;
   border-top: 1px solid white;
   height: 20vh;
 }
@@ -197,6 +198,13 @@ main {
   margin-left: 4rem;
   margin-top: 1rem;
 }
+
+.refresh-all {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
 
 /* Small screens */
 @media only screen and (max-width: 600px) {

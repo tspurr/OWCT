@@ -2,6 +2,7 @@ const mongoose  = require('mongoose');
 const {Team}    = require('./models/team');
 const config    = require('./models/config');
 const _         = require('lodash');
+const toast     = require('../scripts/toast');
 
 // ===================================
 //            Team Functions
@@ -77,4 +78,50 @@ async function updateMembers(teamName, tournament, memberArray) {
 
 };
 
-module.exports = {uploadTeam, getTeam, getTeamN, updateTeam, updateMembers};
+
+// ===================================
+//      Tournament Functions
+// ===================================
+
+async function uploadTournInfo(tournInfo) {
+
+    try {
+        await mongoose.connection.collection(tournInfo.name).insertOne(tournInfo);
+    } catch (error) {
+        toast.tError(`Could not upload ${tournInfo.name} information...`);
+    }
+
+}
+
+
+// This returns an ARRAY of team names and not the team info itself
+async function getTournTeams(tournament) {
+
+    try {
+
+        let data = await mongoose.connection.collection(tournament).findOne({_id: tournament});
+        console.log(`Got teams for ${tournament}`)
+        return data.teams;
+
+    } catch (error) {
+
+        toast.tError(`Could not get ${tournament} teams...`);
+
+    }
+
+}
+
+module.exports = {
+
+    // Team Functions
+    uploadTeam, 
+    getTeam, 
+    getTeamN, 
+    updateTeam, 
+    updateMembers,
+
+    // Tournament Functions
+    uploadTournInfo,
+    getTournTeams
+
+};
