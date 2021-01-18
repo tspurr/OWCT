@@ -212,4 +212,4 @@ async function scrapeAll(URL) {
 } // Scrape
 
 // Exporting
-module.exports = {scrapeAll};
+module.exports = {scrapeAll, sleep};

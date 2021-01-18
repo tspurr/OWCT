@@ -117,8 +117,8 @@
 
                 <div class="team-drop">
 
-                    <select id="teamMenu" onchange="" class="team-selector">
-                        <option value=""> Select a Team </option>
+                    <select id="teamMenu" onchange="loadTeamTable(this.value)" class="team-selector">
+                        <option value="">Select a Team</option>
                     </select>
 
                     <button id="refreshBtn" class="team-refresh" onclick="refreshTeams()">Refresh</button>
@@ -126,7 +126,23 @@
                 </div>
 
                 <div class="team-table">
+
+                    <table>
+                        <thead>
+                            <tr class=".team-table-header">
+                                <td>BNet</td>
+                                <td class="table-right">Tank</td>
+                                <td class="table-right">Damage</td>
+                                <td class="table-right">Support</td>
+                            </tr>
+                        </thead>
+                        <tbody id="teamTable">
+                        </tbody>
+                    </table>
+
+                    <!--Should refresh the team's SR and reload the table-->
                     <button id="refreshTeamTable" class="team-table-refresh">Refresh</button>
+
                 </div>
 
             </div>

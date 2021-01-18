@@ -1,5 +1,4 @@
 const mongoose  = require('mongoose');
-const {Team}    = require('./models/team');
 const config    = require('./models/config');
 const _         = require('lodash');
 const toast     = require('../scripts/toast');
