@@ -34,6 +34,7 @@ main {
 }
 
 .navbar {
+  z-index: 100;
   width: 4rem;
   height: 100vh;
   position: fixed;
@@ -100,6 +101,7 @@ main {
 }
 
 .navbar:hover .link-text {
+  transition: 400ms;
   display: block;
 }
 
@@ -174,6 +176,7 @@ main {
 }
 
 .team-drop {
+  position: relative;
   background-color: cadetblue;
   height: 10%;
   width: 100%;
@@ -181,8 +184,15 @@ main {
 
 .team-table {
   background-color: burlywood;
+  position: relative;
   height: 90%;
   width: 100%;
+}
+
+.team-table-refresh {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
 }
 
 .team-stats {
