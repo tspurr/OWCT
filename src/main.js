@@ -1,9 +1,11 @@
-const scraper       = require('./scripts/scraper.js');
-const refreshBtn    = document.getElementById('refreshBtn');
+const scraper = require('./scripts/scraper.js');
 
 
-// Was already run and the teams were stored
-// I don't know why this is running even when it is not called
+// ==================================
+//         Refresh All Teams
+// ==================================
 function refreshTeams() {
     scraper.scrape('https://gamebattles.majorleaguegaming.com/pc/overwatch/tournament/fa20-owcc-varsity-series-ms/teams');
 }
+
+

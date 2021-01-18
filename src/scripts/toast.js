@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => toast.init());
 
 function tError(message) {
 
-    //console.error(message);
+    console.error(message);
     toast.showError(message);
 
 }

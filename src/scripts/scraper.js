@@ -1,14 +1,18 @@
 const puppeteer = require('puppeteer');
 const $         = require('cheerio');
-const t         = require('./team.js');
-const fs        = require('fs');
 const toast     = require('./toast');
 const _         = require('lodash');
-const { url }   = require('inspector');
+
+// Mongoose Variables
+const mongoose          = require('../database/database');
+      mongoose.init();
+const Team              = require('../database/models/team');
+const database          = require('../database/functions');
 
 
-let tournament = []; // Array of all the teams in the tournament
-let tournNames = [];
+let tournURL = [],
+    tournPos = 6,
+    tournNames = [];
 
 
 // The sleep function to add a pause when turning a page
@@ -51,6 +55,58 @@ function isTeam(str) {
 }
 
 
+// Funciton to store the members of a team
+async function storeMembers(URL) {
+
+    const tempBrowser   = await puppeteer.launch();
+    const tempPage      = await tempBrowser.newPage();
+    let members         = [];
+
+    await tempPage.goto(URL);
+    sleep(500);
+
+    let html = await tempPage.content();
+
+    // Getting down to the lowest level to not get clutter within the pull
+    $('tr > td > div > div > div > div', html).each(function() {
+
+        let BNet        = $(this).text(),
+            poundPos    = BNet.search('#');
+
+        // Test for # to see if the string is a BNet or not
+        // Can't rely on there being a certain amount of players on each time
+        if(poundPos !== -1) {
+
+            let name    = BNet.substr(0, poundPos);
+
+            // Create the model of a member for the array of members that goes
+            // into the team model
+            var member = {
+                name: name,
+                BNet: BNet,
+                AvgSR: -1,
+                MaxSR: -1,
+                SR: {
+                    'Tank': -1,
+                    'Damage': -1,
+                    'Support': -1
+                }
+            };
+
+            members.push(member);
+        }
+
+    });
+
+    // Closing the window when done
+    tempBrowser.close();
+
+    // Return the array of models for the team
+    return members;
+
+}
+
+
 // Function to store the teams on the webpage
 async function storeTeams(html) {
 
@@ -64,11 +120,24 @@ async function storeTeams(html) {
             let holder      = text.substr(0, text.search('Eligible') - 1),
                 teamName    = holder.replace(/\|/gi, ''),
                 teamHRef    = $(this).attr(`href`),
-                teamURL     = `https://gamebattles.majorleaguegaming.com`+ teamHRef,
-                team        = new t.Team(teamName, teamURL);
+                teamURL     = `https://gamebattles.majorleaguegaming.com`+ teamHRef;
             
-            tournNames.push(team.getName());
-            tournament.push(team);
+            tournNames.push(teamName);
+
+            const team = new Team({
+                _id:        teamName,
+                name:       teamName,
+                url:        teamURL,
+
+                // Include await so there are not 400 browsers open
+                members:    []
+            });
+
+            try {
+                database.uploadTeam(team, tournURL[tournPos]);
+            } catch (error) {
+                toast.tError(error);
+            }
 
         }
 
@@ -77,36 +146,14 @@ async function storeTeams(html) {
 }
 
 
-// Funciton to store the members of a team
-async function storeMembers(team, html) {
-
-    // Getting down to the lowest level to not get clutter within the pull
-    $('tr > td > div > div > div > div', html).each(function() {
-
-        let BNet        = $(this).text(),
-            poundPos    = BNet.search('#');
-
-        // Test for # to see if the string is a BNet or not
-        // Can't rely on there being a certain amount of players on each time
-        if(poundPos !== -1) {
-            let name    = BNet.substr(0, poundPos);
-
-            // Adding a player to the Team Object
-            team.addMember(name, BNet);
-        }
-
-    });
-
-}
-
-
-// Main Scrap function that runs the whole file
-// TODO come back and add the website URL as a parameter
-// Allow user to choose what tournament they want
+// =============================================
+//             Main Scrape Function
+// =============================================
 async function scrape(URL) {
 
     const browser   = await puppeteer.launch();
     const page      = await browser.newPage();
+          tournURL = URL.split('/');
 
     // Going to the major league gaming website
     await page.goto(URL);
@@ -134,48 +181,21 @@ async function scrape(URL) {
     // Storing the second page of teams
     await storeTeams(bodyHTML);
 
-    sleep(500);
+    toast.show('teams stored')
 
-    await asyncForEach(tournament, async (team) => {
+    asyncForEach(tournNames, async (team) => {
 
-        // Go to the team page and store the HTML
-        await page.goto(team.getURL());
+        let teamInfo = await database.getTeamN(team, tournURL[tournPos]);
 
-        sleep(500);
+        let memberArray = await storeMembers(teamInfo.url);
 
-        bodyHTML = await page.content();
-
-        storeMembers(team, bodyHTML);
-
-        let teamJSON = JSON.stringify(team, undefined, 4),
-            teamName = team.getName()
-
-        //if(!fs.existsSync(`E:/GitHub/T3.5Scraper/files/${teamName}.json`)) {
-
-            // Storing the JSON file of all the teams
-            fs.writeFile(`./T3.5Scraper/files/${teamName}.json`, teamJSON, 'utf8', function (err) {
-                if (err) {
-                    toast.tError(err);
-                }
-        
-            });
-        //}
-
-    })
-
-    toast.show('Files up to date!');
-
-    // Storing a list of all the teams within the tournament
-    let json = JSON.stringify(tournNames, undefined, 4);
-
-    // Storing the JSON file of all the teams
-    fs.writeFile(`./T3.5Scraper/files/teams.json`, json, 'utf8', function (err) {
-
-        if (err) {
-            toast.tError(err);
-        }
+        await database.updateMembers(teamInfo.name, tournURL[tournPos], memberArray);
 
     });
+
+    sleep(500);
+
+    toast.show('Files up to date!');
 
     // Close the browser window when done
     await browser.close();
