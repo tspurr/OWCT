@@ -84,11 +84,9 @@ async function storeMembers(URL) {
                 BNet: BNet,
                 AvgSR: -1,
                 MaxSR: -1,
-                SR: {
-                    'Tank': -1,
-                    'Damage': -1,
-                    'Support': -1
-                }
+                
+                // Tank, Damage, Support
+                SR: [-1, -1, -1]
             };
 
             members.push(member);
@@ -96,8 +94,7 @@ async function storeMembers(URL) {
 
     });
 
-    // Closing the window when done
-    tempBrowser.close();
+    await tempBrowser.close();
 
     // Return the array of models for the team
     return members;
@@ -127,7 +124,6 @@ async function storeTeams(html) {
                 name:       teamName,
                 url:        teamURL,
 
-                // Include await so there are not 400 browsers open
                 members:    []
             });
 
@@ -194,7 +190,7 @@ async function scrapeAll(URL) {
 
     asyncForEach(tournNames, async (team) => {
 
-        let teamInfo = await database.getTeamN(team, tournURL[tournPos]);
+        let teamInfo    = await database.getTeamN(team, tournURL[tournPos]);
 
         let memberArray = await storeMembers(teamInfo.url);
 

@@ -5,12 +5,26 @@ const _             = require('lodash');
 const database      = require('../database/functions');
 
 
+// The sleep function to add a pause when turning a page
+function sleep(milliseconds) {
+    const date      = Date.now();
+    let currentDate = null;
+
+    do {
+        currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
+}
+
+
 // Make a URL safe BNet
-async function fixBNet(BNet) {
+function fixBNet(BNet) {
     return BNet.replace(/#/gi, '-');
 }
 
+
 function fixSR(SR) {
+
+    console.log(`SR Type: ${typeof SR}`);
     
     if(SR.search('Tank') !== -1) {
         SR = SR.substring(0, 5) + SR.substring(6);
@@ -23,6 +37,7 @@ function fixSR(SR) {
         SR = SR.substring(0, 7) + ' ' + SR.substring(7);
     }
 
+    console.log(`Fixed SR: ${SR}`);
     return SR;
 
 }
@@ -34,21 +49,41 @@ function fixSR(SR) {
 async function getMemberSR(BNet) {
     const browser   = await puppeteer.launch();
     const page      = await browser.newPage();
-    let SR = [];
+    let SR = [-1, -1, -1];
 
-    await page.goto(`https://www.overbuff.com/players/pc/${ fixBNet(BNet) }`);
+    let safeBNet = fixBNet(BNet);
+    try {
+        console.log(`https://www.overbuff.com/players/pc/${safeBNet}`);
+        await page.goto(`https://www.overbuff.com/players/pc/${safeBNet}`);
+    } catch (error) {
+        toast.tError(error);
+    }
 
     let pHTML = await page.content();
+    sleep(500);
 
-    let long = 'div[data-portable="ratings"] > section > article > table > tbody > tr';
-
-    $(long, pHTML).each(function() {
-        let temp = fixSR($(this).text);
+    $('div[data-portable="ratings"] > section > article > table > tbody > tr', pHTML).each(function() {
+        
+        let temp = $(this).text();
+            temp = fixSR(temp);
             temp = temp.split(' ');
         
+        console.log(`\t${safeBNet}: ${temp[1]}`);
+    
         // Setting the positions SR
-        SR[temp[0]] = parseInt(temp[1]);
+        if(temp[0] === 'Tank') {
+            SR[0] = parseInt(temp[1]);
+        } else if (temp[0] === 'Damage') {
+            SR[1] = parseInt(temp[1]);
+        } else if (temp[0] === 'Support') {
+            SR[2] = parseInt(temp[1]);
+        }
+    
+
     });
+
+    // CLOSE THE BROWSER!!!
+    await browser.close();
 
     // Return the SR array for the player
     return SR;
@@ -63,14 +98,19 @@ async function getAllMemberSR(teamName, tournament) {
     let team    = await database.getTeamN(teamName, tournament),
         members = team.members;
 
+
     // Setting the SR for each member within the team data
     for(var i = 0; i < members.length; i++) {
-        members[i].SR = getMemberSR(members[i].BNet);
+        console.log('Member SR: ' + members[i].SR);
+        members[i].SR = await getMemberSR(members[i].BNet);
+        sleep(1000);
     }
+
+    console.log(team);
 
     // Push the edited team model to be updated
     // Database will look by team._id for mathcing document
-    await database.updateTeam(team, tournament);
+    await database.updateMembers(team.name, tournament, team.members);
 
 }
 

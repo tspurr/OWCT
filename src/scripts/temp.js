@@ -1,6 +1,13 @@
 const puppeteer = require('puppeteer');
 const $         = require('cheerio');
 
+
+// Make a URL safe BNet
+function fixBNet(BNet) {
+    return BNet.replace(/#/gi, '-');
+}
+
+
 function fixSR(SR) {
     
     if(SR.search('Tank') !== -1) {
@@ -18,20 +25,54 @@ function fixSR(SR) {
 
 }
 
-async function main() {
+
+async function main(team) {
+
     const browser   = await puppeteer.launch();
     const page      = await browser.newPage();
+    let teamSR = [];
 
+    for(var i = 0; i < team.length; i++) {
 
-    await page.goto(`https://www.overbuff.com/players/pc/UpNorth-11329`);
+        await page.goto(`https://www.overbuff.com/players/pc/${ fixBNet(team[i]) }`);
 
-    let pHTML = await page.content();
+        let pHTML = await page.content();
 
-    let long = 'div[data-portable="ratings"] > section > article > table > tbody > tr';
+        let long = 'div[data-portable="ratings"] > section > article > table > tbody > tr';
+        let pSR = [];
 
-    $(long, pHTML).each(function() {
-        console.log( fixSR($(this).text()) );
-    });
+        $(long, pHTML).each(function() {
+            let sr = fixSR($(this).text());
+            console.log(team[i] + ':' + sr);
+
+            sr = sr.split(' ');
+
+            pSR[sr[0]] = sr[1];
+        });
+
+        teamSR.push(pSR);
+
+    }
+
+    browser.close();
+    return teamSR;
+
 }
 
-main();
+let team = [
+    'Yuena#11442',
+    'BowieJr#1659',
+    'Anditaco#1526',
+    'TankEngine#11951',
+    'BrianT1G#1245',
+    'Flippy#11248',
+    'Gream#11345',
+    'Infinity#12737',
+    'Kage#12961',
+    'UpNorth#11329',
+    'WITHER#11428'
+];
+
+let Members = [];
+
+members = main(team);

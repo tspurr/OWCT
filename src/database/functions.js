@@ -33,6 +33,7 @@ async function getTeam(team, tournament) {
     
 };
 
+
 // Get a team from the database by name
 async function getTeamN(teamName, tournament) {
 
@@ -49,13 +50,14 @@ async function getTeamN(teamName, tournament) {
     
 };
 
+
 // Updating a team in the database
 // Just replacing rn and will come back to make sure that actual comparisons
 // are happening
 async function updateTeam(team, tournament) {
 
     let db = mongoose.connection.collection(tournament);
-    let data = getTeam(team._id, tournament);
+    let data = getTeam(team, tournament);
 
     if(_.isEqual(team, data)) {
         return console.log(`${team._id} not updated, files were the same`);
@@ -64,6 +66,7 @@ async function updateTeam(team, tournament) {
     }
 
 };
+
 
 async function updateMembers(teamName, tournament, memberArray) {
 
@@ -81,7 +84,6 @@ async function updateMembers(teamName, tournament, memberArray) {
 // ===================================
 //      Tournament Functions
 // ===================================
-
 async function uploadTournInfo(tournInfo) {
 
     try {
@@ -109,6 +111,7 @@ async function getTournTeams(tournament) {
     }
 
 }
+
 
 module.exports = {
 

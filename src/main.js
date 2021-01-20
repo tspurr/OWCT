@@ -33,6 +33,8 @@ main()
 // also refresh the menu and call this function
 async function refreshTeams() {
 
+    selectTeam.innerHTML = '<option value="">Select a Team</option>';
+
     let teams = await database.getTournTeams(tournamentName);
 
     teams.sort(); // Sort the array in alphabetical order
@@ -47,6 +49,15 @@ async function refreshTeams() {
 
     }
 
+}
+
+
+function displaySR(SR) {
+    if(SR === -1) {
+        return 'N/A';
+    }else {
+        return SR;
+    }
 }
 
 
@@ -71,9 +82,9 @@ async function loadTeamTable(teamName) {
         
         row.innerHTML = 
            `<td>${members[i].BNet}</td>
-            <td class="table-right">${members[i].SR['Tank']}</td>
-            <td class="table-right">${members[i].SR['Damage']}</td>
-            <td class="table-right">${members[i].SR['Support']}</td>`;
+            <td class="table-right">${displaySR(members[i].SR[0])}</td>
+            <td class="table-right">${displaySR(members[i].SR[1])}</td>
+            <td class="table-right">${displaySR(members[i].SR[2])}</td>`;
 
         teamTableBody.appendChild(row);
 
