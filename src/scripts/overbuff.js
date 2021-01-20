@@ -61,7 +61,7 @@ async function getMemberSR(BNet) {
     }
 
     let pHTML = await page.content();
-    sleep(500);
+    sleep(100);
 
     $('div[data-portable="ratings"] > section > article > table > tbody > tr', pHTML).each(function() {
         
@@ -93,7 +93,7 @@ async function getMemberSR(BNet) {
 
 
 // Member Average SR
-async function avgSR(SR) {
+function avgSR(SR) {
     let count = 0;
     let sum = 0;
 
@@ -104,10 +104,11 @@ async function avgSR(SR) {
         }
     });
 
-    if(sum/count !== NaN)
-        return (sum/count);
-    else
+    if((sum/count).toString() === 'NaN'){
         return -1;
+    } else {
+        return (sum/count);
+    }
 
 }
 
@@ -115,27 +116,21 @@ async function avgSR(SR) {
 // This shit does not work for some reason
 function teamAvgSR(members) {
 
-    let total = [], sum = 0;
+    let count = 0, sum = 0;
 
     for(var i = 0; i < members.length; i++) {
 
-        if(members[i].AvgSR !== NaN) {
+        if(members[i].AvgSR !== -1) {
 
-            console.log(members[i].AvgSR);
-            total.push(members[i].AvgSR);
+            sum += parseInt(members[i].AvgSR);
+            count++;
             
         }
 
     }
 
-    console.log(total);
-
-    for(var i = 0; i < sum.length; i++) {
-        sum += total[i];
-    }
-
-    console.log(`Team Average:\n\tSum: ${sum}, Count: ${total.length}, Avg: ${sum/total.length}`);
-    return (sum / total.length);
+    console.log(`Team Average:\n\tSum: ${sum}, Count: ${count}, Avg: ${sum/count}`);
+    return (sum / count);
 
 }
 
@@ -146,7 +141,7 @@ function top6(members) {
 
     for(var i = 0; i < members.length; i++) {
 
-        if(members[i].MaxSR !== -1 || members[i].MaxSR !== NaN) {
+        if(members[i].MaxSR !== -1) {
             
             mSR.push(members[i].MaxSR);
             
@@ -184,8 +179,10 @@ async function getAllMemberSR(teamName, tournament) {
         members[i].SR       = await getMemberSR(members[i].BNet);
         members[i].MaxSR    = Math.max(...members[i].SR);
         members[i].AvgSR    = avgSR(members[i].SR);
+
+        // console.log(`name: members[i].BNet\nmSR: ${members[i].SR}\n\tMaxSR: ${members[i].MaxSR}\n\tAvgSR: ${members[i].AvgSR}`);
         
-        sleep(1000);
+        sleep(500);
 
     }
 
