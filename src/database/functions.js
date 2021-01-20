@@ -20,8 +20,8 @@ async function uploadTeam(team, tournament) {
 // Get a team from the database
 async function getTeam(team, tournament) {
 
-    let db = mongoose.connection.collection(tournament);
-    let data = await db.findOne({_id: team._id});
+    let db      = mongoose.connection.collection(tournament);
+    let data    = await db.findOne({_id: team._id});
 
     // Check if there was data returned
     if(data)
@@ -37,8 +37,8 @@ async function getTeam(team, tournament) {
 // Get a team from the database by name
 async function getTeamN(teamName, tournament) {
 
-    let db = mongoose.connection.collection(tournament);
-    let data = await db.findOne({_id: teamName});
+    let db      = mongoose.connection.collection(tournament);
+    let data    = await db.findOne({_id: teamName});
 
     // Check if there was data returned
     if(data)
@@ -56,8 +56,8 @@ async function getTeamN(teamName, tournament) {
 // are happening
 async function updateTeam(team, tournament) {
 
-    let db = mongoose.connection.collection(tournament);
-    let data = getTeam(team, tournament);
+    let db      = mongoose.connection.collection(tournament);
+    let data    = getTeam(team, tournament);
 
     if(_.isEqual(team, data)) {
         return console.log(`${team._id} not updated, files were the same`);
@@ -79,6 +79,34 @@ async function updateMembers(teamName, tournament, memberArray) {
     }
 
 };
+
+
+// Insert top6 into team
+// Stupid string wasn't referencing so fuck it
+async function insertT6(team, tournament, newData) {
+
+    let db = mongoose.connection.collection(tournament);
+
+    try {
+        await db.findOneAndUpdate({_id: team._id}, {$set: { 'top6' : newData }});
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+
+
+async function insertTAvg(team, tournament, newData) {
+
+    let db = mongoose.connection.collection(tournament);
+
+    try {
+        await db.findOneAndUpdate({_id: team._id}, {$set: { 'teamAvg' : newData }});
+    } catch (error) {
+        console.log(error);
+    }
+
+}
 
 
 // ===================================
@@ -121,6 +149,8 @@ module.exports = {
     getTeamN, 
     updateTeam, 
     updateMembers,
+    insertT6,
+    insertTAvg,
 
     // Tournament Functions
     uploadTournInfo,

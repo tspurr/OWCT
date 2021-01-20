@@ -7,24 +7,26 @@ const database      = require('../database/functions');
 
 // The sleep function to add a pause when turning a page
 function sleep(milliseconds) {
+
     const date      = Date.now();
     let currentDate = null;
 
     do {
         currentDate = Date.now();
     } while (currentDate - date < milliseconds);
+
 }
 
 
 // Make a URL safe BNet
 function fixBNet(BNet) {
+
     return BNet.replace(/#/gi, '-');
+
 }
 
 
 function fixSR(SR) {
-
-    console.log(`SR Type: ${typeof SR}`);
     
     if(SR.search('Tank') !== -1) {
         SR = SR.substring(0, 5) + SR.substring(6);
@@ -37,7 +39,6 @@ function fixSR(SR) {
         SR = SR.substring(0, 7) + ' ' + SR.substring(7);
     }
 
-    console.log(`Fixed SR: ${SR}`);
     return SR;
 
 }
@@ -47,13 +48,13 @@ function fixSR(SR) {
 //             Getting a Member's SR
 // =============================================
 async function getMemberSR(BNet) {
+
     const browser   = await puppeteer.launch();
     const page      = await browser.newPage();
-    let SR = [-1, -1, -1];
+    let SR          = [-1, -1, -1];
+    let safeBNet    = fixBNet(BNet);
 
-    let safeBNet = fixBNet(BNet);
     try {
-        console.log(`https://www.overbuff.com/players/pc/${safeBNet}`);
         await page.goto(`https://www.overbuff.com/players/pc/${safeBNet}`);
     } catch (error) {
         toast.tError(error);
@@ -67,8 +68,6 @@ async function getMemberSR(BNet) {
         let temp = $(this).text();
             temp = fixSR(temp);
             temp = temp.split(' ');
-        
-        console.log(`\t${safeBNet}: ${temp[1]}`);
     
         // Setting the positions SR
         if(temp[0] === 'Tank') {
@@ -85,8 +84,87 @@ async function getMemberSR(BNet) {
     // CLOSE THE BROWSER!!!
     await browser.close();
 
+    toast.show(`${BNet} done`);
+
     // Return the SR array for the player
     return SR;
+
+}
+
+
+// Member Average SR
+async function avgSR(SR) {
+    let count = 0;
+    let sum = 0;
+
+    SR.forEach(pos => {
+        if(pos !== -1) {
+            count++;
+            sum += pos;
+        }
+    });
+
+    if(sum/count !== NaN)
+        return (sum/count);
+    else
+        return -1;
+
+}
+
+
+// This shit does not work for some reason
+async function teamAvgSR(members) {
+
+    let total = [], sum = 0;
+
+    for(var i = 0; i < members.length; i++) {
+
+        if(members[i].AvgSR !== NaN) {
+
+            total.push(members[i].AvgSR);
+            
+        }
+
+    }
+
+
+
+    for(var i = 0; i < sum.length; i++) {
+        sum += total[i];
+    }
+
+    console.log(`Team Average:\n\tSum: ${sum}, Count: ${total.length}, Avg: ${sum/total.length}`);
+    return (sum / total.length);
+
+}
+
+
+async function top6(members) {
+
+    let sum = 0, mSR = [];
+
+    for(var i = 0; i < members.length; i++) {
+
+        if(members[i].MaxSR !== -1 || members[i].MaxSR !== NaN) {
+            
+            mSR.push(members[i].MaxSR);
+            
+        }
+
+    }
+
+    // Sorting the array highest to lowest
+    mSR.sort();
+    mSR.reverse(); // Makes the array descending
+    console.log(`Max SR: ${mSR}`);
+
+    for(var i = 0; i < 6; i++) {
+        sum += mSR[i];
+    }
+
+    console.log(`Top6 Average:\n\tSum: ${sum}, Avg: ${sum / 6}`);
+    return (sum / 6);
+
 }
 
 
@@ -101,17 +179,26 @@ async function getAllMemberSR(teamName, tournament) {
 
     // Setting the SR for each member within the team data
     for(var i = 0; i < members.length; i++) {
-        console.log('Member SR: ' + members[i].SR);
-        members[i].SR = await getMemberSR(members[i].BNet);
-        sleep(1000);
-    }
 
-    console.log(team);
+        members[i].SR       = await getMemberSR(members[i].BNet);
+        members[i].MaxSR    = Math.max(...members[i].SR);
+        members[i].AvgSR    = avgSR(members[i].SR);
+        
+        sleep(1000);
+
+    }
 
     // Push the edited team model to be updated
     // Database will look by team._id for mathcing document
-    await database.updateMembers(team.name, tournament, team.members);
+    await database.updateMembers(team.name, tournament, members);
 
+    let teamAvg     = await teamAvgSR(members);
+    let topSix      = await top6(members);
+
+    await database.insertT6(team, tournament, topSix);
+    await database.insertTAvg(team, tournament, teamAvg);
+
+    toast.show('Team Updated');
 }
 
 module.exports = {

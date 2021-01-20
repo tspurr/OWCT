@@ -7,7 +7,8 @@ function fixBNet(BNet) {
     return BNet.replace(/#/gi, '-');
 }
 
-
+// This function is to separate the Pos from the SR and
+// remove the , from the numbers as well
 function fixSR(SR) {
     
     if(SR.search('Tank') !== -1) {
@@ -30,22 +31,20 @@ async function main(team) {
 
     const browser   = await puppeteer.launch();
     const page      = await browser.newPage();
-    let teamSR = [];
+    let teamSR      = [];
 
     for(var i = 0; i < team.length; i++) {
 
         await page.goto(`https://www.overbuff.com/players/pc/${ fixBNet(team[i]) }`);
 
-        let pHTML = await page.content();
-
-        let long = 'div[data-portable="ratings"] > section > article > table > tbody > tr';
-        let pSR = [];
+        let pHTML   = await page.content();
+        let long    = 'div[data-portable="ratings"] > section > article > table > tbody > tr';
+        let pSR     = [];
 
         $(long, pHTML).each(function() {
-            let sr = fixSR($(this).text());
-            console.log(team[i] + ':' + sr);
 
-            sr = sr.split(' ');
+            let sr = fixSR($(this).text());
+                sr = sr.split(' ');
 
             pSR[sr[0]] = sr[1];
         });
@@ -74,5 +73,6 @@ let team = [
 ];
 
 let Members = [];
-
+let sum = 0, count = 0;
+console.log(sum/count);
 members = main(team);

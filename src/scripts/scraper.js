@@ -8,9 +8,9 @@ const Tournament        = require('../database/models/tournament');
 const database          = require('../database/functions');
 
 
-let tournURL = [],
-    tournPos = 6,
-    tournNames = [];
+let tournURL    = [],
+    tournPos    = 6,
+    tournNames  = [];
 
 
 // The sleep function to add a pause when turning a page
