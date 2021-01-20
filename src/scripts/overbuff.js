@@ -113,7 +113,7 @@ async function avgSR(SR) {
 
 
 // This shit does not work for some reason
-async function teamAvgSR(members) {
+function teamAvgSR(members) {
 
     let total = [], sum = 0;
 
@@ -121,13 +121,14 @@ async function teamAvgSR(members) {
 
         if(members[i].AvgSR !== NaN) {
 
+            console.log(members[i].AvgSR);
             total.push(members[i].AvgSR);
             
         }
 
     }
 
-
+    console.log(total);
 
     for(var i = 0; i < sum.length; i++) {
         sum += total[i];
@@ -139,7 +140,7 @@ async function teamAvgSR(members) {
 }
 
 
-async function top6(members) {
+function top6(members) {
 
     let sum = 0, mSR = [];
 
@@ -192,8 +193,8 @@ async function getAllMemberSR(teamName, tournament) {
     // Database will look by team._id for mathcing document
     await database.updateMembers(team.name, tournament, members);
 
-    let teamAvg     = await teamAvgSR(members);
-    let topSix      = await top6(members);
+    let teamAvg     = teamAvgSR(members);
+    let topSix      = top6(members);
 
     await database.insertT6(team, tournament, topSix);
     await database.insertTAvg(team, tournament, teamAvg);
