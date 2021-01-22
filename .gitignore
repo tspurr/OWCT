@@ -88,3 +88,4 @@ typings/
 # Electron-Forge
 out/
 src/config.js
+src/tspurr-OWCT-1003.json

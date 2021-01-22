@@ -1,14 +1,28 @@
-const scraper           = require('./scripts/scraper.js');
-const database          = require('./database/functions');
-const mongoose          = require('./database/database');
-const overbuff          = require('./scripts/overbuff');
+const firebase  = require('firebase');
+                  require('firebase/firestore');
+const config    = require('./config');
+const toast     = require('./scripts/toast');
+
+// Initialize the SDK to firebase
+try {
+    firebase.initializeApp(config.firebaseConfig);
+} catch (error) {
+    return console.error(error);
+}
+
+// Sign the user in annonymously
+try {
+    firebase.auth().signInAnonymously();
+} catch (error) {
+    return console.error('Could not sign in anonymously');
+}
+
+const database          = firebase.firestore();
+const scrapeTournament  = firebase.functions.httpsCallaable('scrapeTournament');
 
 const tournamentName    = 'fa20-owcc-varsity-series-ms';
 let selectTeam          = document.getElementById('teamMenu');
 let teamTableBody       = document.getElementById('teamTable');
-
-// Need to initialize the connection to the database FIRST 
-mongoose.init();
 
 
 // ==================================
@@ -35,7 +49,7 @@ async function refreshTeams() {
 
     selectTeam.innerHTML = '<option value="">Select a Team</option>';
 
-    let teams = await database.getTournTeams(tournamentName);
+    let teams = await database.collection(tournamentName).doc('info').get().teams;
 
     teams.sort(); // Sort the array in alphabetical order
 
@@ -72,7 +86,7 @@ async function loadTeamTable(teamName) {
     if(teamName === 'Select a Team')
         return;
 
-    let team    = await database.getTeamN(teamName, tournamentName);
+    let team    = await database.collection(tournamentName).doc(teamName).get();
     let members = team.members;
 
     // Loop thorugh the members on the team and store the rel. information
@@ -112,8 +126,14 @@ async function refreshTeamSR() {
 // ==================================
 async function refreshTournament() {
 
-    await scraper.scrapeAll('https://gamebattles.majorleaguegaming.com/pc/overwatch/tournament/fa20-owcc-varsity-series-ms/teams');
-
+    scrapeTournament({url: 'https://gamebattles.majorleaguegaming.com/pc/overwatch/tournament/fa20-owcc-varsity-series-ms/teams'})
+        .then((result) => {
+            toast.show(result);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    
 }
 
 

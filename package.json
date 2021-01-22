@@ -45,7 +45,9 @@
     }
   },
   "dependencies": {
+    "@google-cloud/firestore": "^4.8.1",
     "electron-squirrel-startup": "^1.0.0",
+    "firebase": "^8.2.4",
     "lodash": "^4.17.20",
     "mongoose": "^5.11.12"
   },
