@@ -4,21 +4,12 @@ const config    = require('./config');
 const toast     = require('./scripts/toast');
 
 // Initialize the SDK to firebase
-try {
-    firebase.initializeApp(config.firebaseConfig);
-} catch (error) {
-    return console.error(error);
-}
+firebase.initializeApp(config.firebaseConfig);
+firebase.auth().signInAnonymously();
 
-// Sign the user in annonymously
-try {
-    firebase.auth().signInAnonymously();
-} catch (error) {
-    return console.error('Could not sign in anonymously');
-}
 
 const database          = firebase.firestore();
-const scrapeTournament  = firebase.functions.httpsCallaable('scrapeTournament');
+const scrapeTournament  = firebase.functions().httpsCallable('scraper-scrapeTournament');
 
 const tournamentName    = 'fa20-owcc-varsity-series-ms';
 let selectTeam          = document.getElementById('teamMenu');
@@ -49,9 +40,9 @@ async function refreshTeams() {
 
     selectTeam.innerHTML = '<option value="">Select a Team</option>';
 
-    let teams = await database.collection(tournamentName).doc('info').get().teams;
+    let tournTeams = await database.collection(tournamentName).doc('info').get().teams;
 
-    teams.sort(); // Sort the array in alphabetical order
+    tournTeams.sort(); // Sort the array in alphabetical order
 
     for(var i = 0; i < teams.length; i++) {
 
@@ -126,12 +117,14 @@ async function refreshTeamSR() {
 // ==================================
 async function refreshTournament() {
 
-    scrapeTournament({url: 'https://gamebattles.majorleaguegaming.com/pc/overwatch/tournament/fa20-owcc-varsity-series-ms/teams'})
+    scrapeTournament( {url: "https://gamebattles.majorleaguegaming.com/pc/overwatch/tournament/fa20-owcc-varsity-series-ms/teams"} )
         .then((result) => {
-            toast.show(result);
+            console.log(result.response);
         })
         .catch((error) => {
-            console.error(error);
+            console.error(error.code);
+            console.error(error.message);
+            console.error(error.details);
         });
     
 }
