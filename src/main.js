@@ -9,7 +9,8 @@ firebase.auth().signInAnonymously();
 
 
 const database          = firebase.firestore();
-const scrapeTournament  = firebase.functions().httpsCallable('scraper-scrapeTournament');
+const scrapeTournament  = firebase.functions().httpsCallable('api-storeTournament');
+const tournID           = '151515';
 
 const tournamentName    = 'fa20-owcc-varsity-series-ms';
 let selectTeam          = document.getElementById('teamMenu');
@@ -40,9 +41,10 @@ async function refreshTeams() {
 
     selectTeam.innerHTML = '<option value="">Select a Team</option>';
 
-    let tournTeams = await database.collection(tournamentName).doc('info').get().teams;
+    let teams = await database.collection(tournamentName).doc('info').get();
+        teams = teams.data().teams
 
-    tournTeams.sort(); // Sort the array in alphabetical order
+    teams.sort(); // Sort the array in alphabetical order
 
     for(var i = 0; i < teams.length; i++) {
 
@@ -78,6 +80,7 @@ async function loadTeamTable(teamName) {
         return;
 
     let team    = await database.collection(tournamentName).doc(teamName).get();
+        team    = team.data();
     let members = team.members;
 
     // Loop thorugh the members on the team and store the rel. information
@@ -117,14 +120,12 @@ async function refreshTeamSR() {
 // ==================================
 async function refreshTournament() {
 
-    scrapeTournament( {url: "https://gamebattles.majorleaguegaming.com/pc/overwatch/tournament/fa20-owcc-varsity-series-ms/teams"} )
+    scrapeTournament( {id: tournID} )
         .then((result) => {
-            console.log(result.response);
+            console.log(result);
         })
         .catch((error) => {
-            console.error(error.code);
-            console.error(error.message);
-            console.error(error.details);
+            console.error(error);
         });
     
 }

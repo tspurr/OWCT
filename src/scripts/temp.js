@@ -1,163 +1,56 @@
-const puppeteer = require('puppeteer');
-const $         = require('cheerio');
-const functions = require('firebase-functions');
+const fetch = require('node-fetch');
 
-const admin     = require('firebase-admin');
-const database  = admin.firestore();
+let GB = 'https://gb-api.majorleaguegaming.com/',
+    tournament = 'api/web/v1/tournament-screen/',
+    teams = 'api/v1/tournament-team/with-eligibility-and-premium-status/',
+    team = 'api/web/v1/team-members-extended/team/',
+    tournID = '151515',
+    pageTwo = '?pageNumber=2&pageSize=25',
+    UMichID = '34959968';
 
-// Global Variables are BAD I KNOW!
-let tournURL    = [],
-    tournPos    = 6,
-    tournNames  = [];
+async function getTourn() {
 
+    let response = await fetch(GB+tournament+tournID);
+    let data = await response.json();
 
-const PUPPERTEER_OPTIONS = {
-    headless: true,
-    args: [
-        '--disable-gpu',
-        '--disable-dev-shm-usage',
-        '--disable-setuid-sandbox',
-        '--timeout=30000',
-        '--no-first-run',
-        '--no-sandbox',
-        '--no-zygote',
-        '--single-process',
-        "--proxy-server='direct://'",
-        '--proxy-bypass-list=*',
-        '--deterministic-fetch',
-    ],
-};
+    // let tournament = data.body.tournament;
 
+    // let title = tournament.title;
+    // let url = tournament.url;
+    // let id = tournament.id;
+    // let shortURL = tournament.simpleUrl;
 
-const openConnection = async() => {
+    return data;
 
-    const browser = await puppeteer.launch(PUPPERTEER_OPTIONS);
-    const page = await browser.newPage();
+}
 
-    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36');
+async function getTeams() {
+    let response = await fetch(GB+teams+tournID);
+    let data = await response.json();
 
-    await page.setViewport({ width: 1680, height: 1050 });
-    return {browser, page};
+    let response2 = await fetch(GB+teams+tournID+pageTwo);
+    let data2 = await response2.json();
 
-};
+    let records = data.body.records;
+    let records2 = data2.body.records;
+    records = records.concat(records2);
 
+    return data;
+}
 
-// Close the connection on puppeteer
-const closeConnection = async(page, browser) => {
+async function getTeam() {
+    let response = await fetch(GB+team+UMichID);
+    let data = await response.json();
 
-    page && (await page.close());
-    browser && (await browser.close());
+    let teamMembers = data.body;
 
-};
+    let BNet = teamMembers[0].teamMember.gamertag;
+    let MemberID = teamMembers[0].teamMember.userId;
+    let username = teamMembers[0].teamMember.username;
 
+    return data;
+}
 
-exports.scrapeTournament = functions.https.onCall(async (req, res) => {
-
-    console.log(req);
-
-    let {browser, page} = openConnection();
-    
-    try {
-        
-        await page.goto(data.url, { waitUntil: 'load' });
-        let bodyHTML    = await page.content();
-
-        // Look into making this a function again
-        $('a', bodyHTML).each(function() {
-
-            let text    = $(this).text();
-            let isTeam  = false;
-
-            if (text.search('Eligible') != -1 || text.search('Ineligible') != -1) {
-                 isTeam = true;  
-            }
-    
-            if ( isTeam ) {
-    
-                let holder      = text.substr(0, text.search('Eligible') - 1),
-                    teamName    = holder.replace(/\|/gi, ''),
-                    teamHRef    = $(this).attr(`href`),
-                    teamURL     = `https://gamebattles.majorleaguegaming.com`+ teamHRef;
-                
-                tournNames[teamName] = teamURL;
-                console.log(`Team ${teamName} Logged`);
-    
-                const team = {
-                    name:       teamName,
-                    url:        teamURL,
-                    AvgSR:      -1,
-                    Top6SR:     -1,
-                    timestamp:  new Date().toLocaleString().replace(',',''),
-    
-                    members:    []
-                };
-    
-                batch.set(database.collection(tournURL[tournPos]).doc(team.name), team);
-                console.log(`Team Logged ${team}`);
-            }
-    
-        });
-
-        await page.click('button[aria-label="Next page"]', { waitUntil: 'load' });
-        bodyHTML = await page.content();
-
-        // Look into making this a function again
-        $('a', bodyHTML).each(function() {
-
-            let text    = $(this).text();
-            let isTeam  = false;
-
-            if (text.search('Eligible') != -1 || text.search('Ineligible') != -1) {
-                 isTeam = true;  
-            }
-            if ( isTeam ) {
-    
-                let holder      = text.substr(0, text.search('Eligible') - 1),
-                    teamName    = holder.replace(/\|/gi, ''),
-                    teamHRef    = $(this).attr(`href`),
-                    teamURL     = `https://gamebattles.majorleaguegaming.com`+ teamHRef;
-                
-                tournNames[teamName] = teamURL;
-                console.log(`Team ${teamName} Logged`);
-    
-                const team = {
-                    name:       teamName,
-                    url:        teamURL,
-                    AvgSR:      -1,
-                    Top6SR:     -1,
-                    timestamp:  new Date().toLocaleString().replace(',',''),
-    
-                    members:    []
-                };
-    
-                batch.set(database.collection(tournURL[tournPos]).doc(team.name), team);
-                console.log(`Team Logged ${team}`);
-            }
-    
-        });
-
-        const tournament = {
-            name:   tournURL[tournPos],
-            url:    URL,
-    
-            teams:  tournNames
-        };
-
-        batch.set(database.collection(tournURL[tournPos]).doc('info'), tournament);
-
-        await batch.commit();
-
-        res.status(200).send('Scrape Done!');
-
-    } catch (error) {
-
-        res.status(500).send(error);
-        
-    } finally {
-
-        await closeConnection(page, browser);
-        console.log('Browser Closed');
-
-    }
-
-});
+getTourn().then(data => console.log(data.body));
+getTeams();
+getTeam();
