@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "@google-cloud/firestore": "^4.8.1",
+    "cheerio": "^1.0.0-rc.5",
     "electron-squirrel-startup": "^1.0.0",
     "firebase": "^8.2.4",
     "lodash": "^4.17.20",

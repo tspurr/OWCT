@@ -1,56 +1,47 @@
 const fetch = require('node-fetch');
+const $     = require('cheerio');
 
-let GB = 'https://gb-api.majorleaguegaming.com/',
-    tournament = 'api/web/v1/tournament-screen/',
-    teams = 'api/v1/tournament-team/with-eligibility-and-premium-status/',
-    team = 'api/web/v1/team-members-extended/team/',
-    tournID = '151515',
-    pageTwo = '?pageNumber=2&pageSize=25',
-    UMichID = '34959968';
+function fixSR(SR) {	
 
-async function getTourn() {
+    if(SR.search('Tank') !== -1) {	
+        SR = SR.substring(0, 5) + SR.substring(6);	
+        SR = SR.substring(0, 4) + ' ' + SR.substring(4);	
+    }else if(SR.search('Damage') !== -1) {	
+        SR = SR.substring(0, 7) + SR.substring(8);	
+        SR = SR.substring(0, 6) + ' ' + SR.substring(6);	
+    }else if(SR.search('Support') !== -1) {	
+        SR = SR.substring(0, 8) + SR.substring(9);	
+        SR = SR.substring(0, 7) + ' ' + SR.substring(7);	
+    }	
 
-    let response = await fetch(GB+tournament+tournID);
-    let data = await response.json();
-
-    // let tournament = data.body.tournament;
-
-    // let title = tournament.title;
-    // let url = tournament.url;
-    // let id = tournament.id;
-    // let shortURL = tournament.simpleUrl;
-
-    return data;
+    return SR;	
 
 }
 
-async function getTeams() {
-    let response = await fetch(GB+teams+tournID);
-    let data = await response.json();
+async function getSR(User) {
 
-    let response2 = await fetch(GB+teams+tournID+pageTwo);
-    let data2 = await response2.json();
+    let response = await fetch('https://www.overbuff.com/players/pc/' + User);
+    let data = await response.text();
+    let SR = [-1, -1, -1];
 
-    let records = data.body.records;
-    let records2 = data2.body.records;
-    records = records.concat(records2);
+    $('div[data-portable="ratings"] > section > article > table > tbody > tr', data).each(function() {
+        
+        let tempSR = $(this).text();
+            tempSR = fixSR(tempSR);
+            tempSR = tempSR.split(' ');
 
-    return data;
+        if(tempSR[0] === 'Tank') {
+            SR[0] = tempSR[1];
+        }else if(tempSR[0] === 'Damage') {
+            SR[1] = tempSR[1];
+        }else if(tempSR[0] === 'Support') {
+            SR[2] = tempSR[1];
+        }
+
+    });
+    
+    return SR;
+
 }
 
-async function getTeam() {
-    let response = await fetch(GB+team+UMichID);
-    let data = await response.json();
-
-    let teamMembers = data.body;
-
-    let BNet = teamMembers[0].teamMember.gamertag;
-    let MemberID = teamMembers[0].teamMember.userId;
-    let username = teamMembers[0].teamMember.username;
-
-    return data;
-}
-
-getTourn().then(data => console.log(data.body));
-getTeams();
-getTeam();
+getSR('UpNorth-11329');

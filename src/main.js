@@ -10,6 +10,7 @@ firebase.auth().signInAnonymously();
 
 const database          = firebase.firestore();
 const scrapeTournament  = firebase.functions().httpsCallable('api-storeTournament');
+const getTeamSR         = firebase.functions().httpsCallable('api-storeSkillRating');
 const tournID           = '151515';
 
 const tournamentName    = 'fa20-owcc-varsity-series-ms';
@@ -108,9 +109,10 @@ async function refreshTeamSR() {
 
     let team = selectTeam.value;
 
-    await overbuff.getAllMemberSR(team, tournamentName);
-
-    loadTeamTable(team);
+    getTeamSR({team: team, tournament: tournamentName})
+        .then(() => {
+            loadTeamTable(team);
+        });
 
 }
 
