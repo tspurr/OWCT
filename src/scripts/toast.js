@@ -1,4 +1,3 @@
-
 const toast = {
 
     init() {
@@ -55,14 +54,14 @@ const toast = {
 
 document.addEventListener('DOMContentLoaded', () => toast.init());
 
-function tError(message) {
+function Error(message) {
 
     console.error(message);
     toast.showError(message);
 
 }
 
-function tWarning(message) {
+function Warning(message) {
 
     //console.log(message);
     toast.showWarning(message);
@@ -76,6 +75,6 @@ function show(message) {
 
 }
 
-module.exports.tError   = tError;
-module.exports.tWarning = tWarning;
-module.exports.show     = show;
+module.exports.Error   = Error;
+module.exports.Warning = Warning;
+module.exports.show    = show;

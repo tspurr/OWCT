@@ -117,6 +117,10 @@
 
                 <div class="team-drop">
 
+                    <select id="tournMenu" onchange="refreshTeams(this.value)" class="tourn-selector">
+                        <option value="">Select a Tournament</option>
+                    </select>
+
                     <select id="teamMenu" onchange="loadTeamTable(this.value)" class="team-selector">
                         <option value="">Select a Team</option>
                     </select>

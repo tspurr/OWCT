@@ -9,12 +9,13 @@ firebase.auth().signInAnonymously();
 
 
 const database          = firebase.firestore();
-const scrapeTournament  = firebase.functions().httpsCallable('api-storeTournament');
-const getTeamSR         = firebase.functions().httpsCallable('api-storeSkillRating');
+const scrapeTournament  = firebase.functions().httpsCallable('GameBattlesAPI');
+const getTeamSR         = firebase.functions().httpsCallable('OverBuffAPI');
 const tournID           = '151515';
 
 const tournamentName    = 'fa20-owcc-varsity-series-ms';
 let selectTeam          = document.getElementById('teamMenu');
+let selectTournament    = document.getElementById('tournMenu');
 let teamTableBody       = document.getElementById('teamTable');
 
 
@@ -25,7 +26,7 @@ let teamTableBody       = document.getElementById('teamTable');
 // PAGE LOAD!! EVERYTHING ELSE CAN BE NOT HERE! GOT IT?!?!
 async function main() {
 
-    await refreshTeams();
+    await loadTournaments();
 
 }
 
@@ -38,12 +39,12 @@ main()
 
 // Called in main when page is loaded, the refreshTeams button will
 // also refresh the menu and call this function
-async function refreshTeams() {
+async function refreshTeams(tournamentName) {
 
     selectTeam.innerHTML = '<option value="">Select a Team</option>';
 
     let teams = await database.collection(tournamentName).doc('info').get();
-        teams = teams.data().teams
+        teams = teams.data().teams;
 
     teams.sort(); // Sort the array in alphabetical order
 
@@ -80,9 +81,8 @@ async function loadTeamTable(teamName) {
     if(teamName === 'Select a Team')
         return;
 
-    let team    = await database.collection(tournamentName).doc(teamName).get();
-        team    = team.data();
-    let members = team.members;
+    let members = await database.collection(tournamentName).doc(teamName).get();
+        members = members.data().members;
 
     // Loop thorugh the members on the team and store the rel. information
     for(var i = 0; i < members.length; i++) {
@@ -109,7 +109,7 @@ async function refreshTeamSR() {
 
     let team = selectTeam.value;
 
-    getTeamSR({team: team, tournament: tournamentName})
+    await getTeamSR({team: team, tournament: tournamentName})
         .then(() => {
             loadTeamTable(team);
         });
@@ -118,9 +118,37 @@ async function refreshTeamSR() {
 
 
 // ==================================
+//         Refresh Tournaments
+// ==================================
+async function loadTournaments() {
+
+    selectTournament.innerHTML = '<option value="">Select a Tournament</option>';
+
+    // Get all the documents within the tournaments collection
+    let tournaments = await database.collection('tournaments').get();
+        tournaments = tournaments.docs.map(doc => doc.data());
+    
+    // Parse thorugh all the tournaments
+    for(var i = 0; i < tournaments.length; i++) {
+
+        // Add an option for each torunament based on the short URL
+        let el      = document.createElement('option');
+        el.text     = tournaments[i].shortURL;
+        el.value    = tournaments[i].shortURL;
+
+        selectTournament.appendChild(el);
+
+    }
+
+}
+
+
+// ==================================
 //      Refresh Whole Tournament
 // ==================================
 async function refreshTournament() {
+
+    let tournID = '159390';
 
     scrapeTournament( {id: tournID} )
         .then((result) => {
