@@ -11,9 +11,7 @@ firebase.auth().signInAnonymously();
 const database          = firebase.firestore();
 const scrapeTournament  = firebase.functions().httpsCallable('GameBattlesAPI');
 const getTeamSR         = firebase.functions().httpsCallable('OverBuffAPI');
-const tournID           = '151515';
 
-const tournamentName    = 'fa20-owcc-varsity-series-ms';
 let selectTeam          = document.getElementById('teamMenu');
 let selectTournament    = document.getElementById('tournMenu');
 let teamTableBody       = document.getElementById('teamTable');
@@ -39,7 +37,10 @@ main()
 
 // Called in main when page is loaded, the refreshTeams button will
 // also refresh the menu and call this function
-async function refreshTeams(tournamentName) {
+async function refreshTeams() {
+
+    let tournamentName = selectTournament.value;
+    console.log(tournamentName);
 
     selectTeam.innerHTML = '<option value="">Select a Team</option>';
 
@@ -75,6 +76,8 @@ function displaySR(SR) {
 // the table
 async function loadTeamTable(teamName) {
 
+    let tournamentName = selectTournament.value;
+
     // Set the table back to nothing
     teamTableBody.innerHTML = '';
 
@@ -107,6 +110,7 @@ async function loadTeamTable(teamName) {
 // ==================================
 async function refreshTeamSR() {
 
+    let tournamentName = selectTournament.value;
     let team = selectTeam.value;
 
     await getTeamSR({team: team, tournament: tournamentName})
