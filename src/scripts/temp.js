@@ -34,7 +34,6 @@ async function main(tournID) {
                 winningTeam = match.visitorTeamBracketInfo.teamname;
             }
             
-
             console.log(data3);
 
         }

@@ -1,161 +1,36 @@
 :root {
-  font-size: 16px;
-  margin: 0;
-  padding: 0;
-  --text-primary:    white;
-  --text-secondary:  lime;
-  --bg-primary:    #282C34;
-  --bg-secondary:  #21252B;
-  --bg-tertiary:   #2e3238;
-  --transition-speed:  200ms;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    --text-primary:    white;
+    --text-secondary:  lime;
+    --bg-primary:    #282C34;
+    --bg-secondary:  #21252B;
+    --bg-tertiary:   #2e3238;
+    --transition-speed:  200ms;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  color: white;
-  background-color: var(--bg-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: white;
+    background-color: var(--bg-primary);
 }
 
 body::-webkit-scrollbar {
-  width: 0.25rem;
+    width: 0.25rem;
 }
 
 body::-webkit-scrollbar-track {
-  background: var(--bg-secondary);
+    background: var(--bg-secondary);
 }
 
 body::-webkit-scrollbar-thumb {
-  background: purple;
+    background: purple;
 }
 
 main {
-  margin-left: 4rem;
-  /*padding: 1rem;*/
-}
-
-/*###########################
-            Nav Bar
-#############################*/
-.navbar {
-  z-index: 100;
-  width: 4rem;
-  height: 100vh;
-  position: fixed;
-  left: 0;
-  top: 0;
-  background-color: var(--bg-secondary);
-  transition: var(--transition-speed) ease;
-}
-
-.navbar-nav {
-  padding: 0;
-  margin: 0;
-  width: 4rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.navbar:hover .navbar-nav {
-  width: 16rem;
-}
-
-.nav-item {
-  width: 100%;
-}
-
-.nav-item:last-child {
-  margin-top: auto;
-}
-
-.nav-link {
-  display: flex;
-  align-items: center;
-  height: 4rem;
-  color: var(--text-primary);
-  text-decoration: none;
-  filter: grayscale(100%) opacity(0.7);
-  transition: 600ms;
-}
-
-.nav-link:hover {
-  text-decoration: none;
-  filter:  grayscale(0%) opacity(1);
-  background: var(--bg-tertiary);
-}
-
-.link-text {
-  display: none;
-}
-
-.nav-link svg {
-  min-width: 1rem;
-  margin: 0 1rem;
-}
-
-.nav-link img {
-  min-width: 1rem;
-  width: 2rem;
-  margin: 0 1rem;
-}
-
-.navbar:hover {
-  width: 16rem;
-}
-
-.navbar:hover .link-text {
-  transition: 400ms;
-  display: block;
-}
-
-.navbar:hover .nav-link img {
-  width: 2rem;
-}
-
-.fa-primary {
-  background-color: var(--text-primary);
-}
-
-.fa-secondary {
-  background-color: var(--text-secondary);
-}
-
-.fa-primary, .fa-secondary {
-  transition: 200ms;
-}
-
-.logo {
-  font-weight: bold;
-  text-transform: uppercase;
-  margin-bottom: 1rem;
-  text-align: center;
-  color: white;
-  font-size: 1.5rem;
-  letter-spacing: 0.3ch;
-  width: 100%;
-}
-
-.logo svg {
-  min-width: 1rem;
-  margin: 0 1rem;
-  transform: rotate(0deg);
-  transition: transform 600ms;
-}
-
-.navbar:hover .logo svg {
-  transform: rotate(360deg);
-}
-
-.nav-hr {
-  padding: 0;
-  margin: 0;
-  border-top: 2px solid #bcbdbf;
-  width: 1rem;
-  transition: 200ms ease;
-}
-
-.navbar:hover .nav-hr {
-  width: 14rem;
+    margin-left: 4rem;
+    /*padding: 1rem;*/
 }
 
 
@@ -164,66 +39,66 @@ main {
 #############################*/
 .team-main {
   /* background-color: pink; */
-  position: relative;
-  padding: 0;
-  height: 70vh;
+    position: relative;
+    padding: 0;
+    height: 70vh;
 }
 
 .team-footer {
   /* background-color: aqua; */
-  position: relative;
-  border-top: 1px solid white;
-  height: 20vh;
+    position: relative;
+    border-top: 1px solid white;
+    height: 20vh;
 }
 
 .team-disp {
   /* background-color: aquamarine; */
-  position: absolute;
-  height: 100%;
-  width: 70%;
+    position: absolute;
+    height: 100%;
+    width: 70%;
 }
 
 .team-drop {
   position: relative;
   /* background-color: cadetblue; */
-  height: 10%;
-  width: 100%;
+    height: 10%;
+    width: 100%;
 }
 
 .team-stats {
   /* background-color: rgb(232, 238, 175); */
-  border-left: 1px solid white;
-  float: right;
-  position: relative;
-  height: 70vh;
-  width: 30%;
+    border-left: 1px solid white;
+    float: right;
+    position: relative;
+    height: 70vh;
+    width: 30%;
 }
 
 .team-selector {
-  min-width: 10rem;
-  margin-left: 4rem;
-  margin-top: 1rem;
+    min-width: 10rem;
+    margin-left: 4rem;
+    margin-top: 1rem;
 }
 
 .refresh-all {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
 }
 
 /*###########################
          Team Table
 #############################*/
 table {
-  vertical-align: center;
-  width: 100%;
-  padding: 5px;
-  display: table;
-  border-collapse: separate;
-  box-sizing: border-box;
-  text-indent: initial;
-  border-spacing: 0;
-  border-color: rgb(0, 0, 0);
+    vertical-align: center;
+    width: 100%;
+    padding: 5px;
+    display: table;
+    border-collapse: separate;
+    box-sizing: border-box;
+    text-indent: initial;
+    border-spacing: 0;
+    border-color: rgb(0, 0, 0);
 }
 
 tr {
@@ -232,49 +107,49 @@ tr {
 
 td {
   /*background-color: darkblue;*/
-  width: 25%;
-  border-right: 1px solid white;
-  padding-right: 3px;
+    width: 25%;
+    border-right: 1px solid white;
+    padding-right: 3px;
 }
 
 .team-table {
   /* background-color: burlywood; */
-  position: relative;
-  height: 90%;
-  width: 100%;
-  overflow: scroll;
+    position: relative;
+    height: 90%;
+    width: 100%;
+    overflow: scroll;
 }
 
 .team-table::-webkit-scrollbar {
-  width: 0.25rem;
+    width: 0.25rem;
 }
 
 .team-table::-webkit-scrollbar-track {
-  background: none;
+    background: none;
 }
 
 .team-table::-webkit-scrollbar-thumb {
-  background: purple;
+    background: purple;
 }
 
 .team-table::-webkit-scrollbar-button {
-  width: 0;
+    width: 0;
 }
 
 .team-table-header {
-  display: table-header-group;
+    display: table-header-group;
 }
 
 .table-right {
-  border-right: 0;
-  position: relative;
-  text-align: center;
+    border-right: 0;
+    position: relative;
+    text-align: center;
 }
 
 .team-table-refresh {
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
 }
 
 
@@ -282,63 +157,32 @@ td {
     Small Screen Adjustment
 #############################*/
 @media only screen and (max-width: 600px) {
-  .navbar {
-    bottom: 0;
-    margin-bottom: 0;
-    width: 100vw;
-    height: 4rem;
-  }
 
-  .navbar:hover {
-    width: 100vw;
-  }
+    main {
+        margin: 0;
+        padding-bottom: 0;
+    }
 
-  .navbar:hover .link-text {
-    display: none;
-  }
+    .team-main {
+        margin-top: 4rem;
+    }
 
-  .logo {
-    display: none;
-  }
+    .team-disp {
+        position: relative;
+        height: 70%;
+        width: 100%;
+    }
 
-  .navbar-nav {
-    flex-direction: row;
-  }
+    .team-stats {
+        border-left: 0;
+        border-top: 1px solid white;
+        float: bottom;
+        height: 30%;
+        width: 100%;
+    }
 
-  .nav-link {
-    text-decoration: none;
-    justify-content: center;
-  }
-
-  main {
-    margin: 0;
-    padding-bottom: 0;
-  }
-
-  .nav-hr {
-    width: 0;
-  }
-
-  .team-main {
-    margin-top: 4rem;
-  }
-
-  .team-disp {
-    position: relative;
-    height: 70%;
-    width: 100%;
-  }
-
-  .team-stats {
-    border-left: 0;
-    border-top: 1px solid white;
-    float: bottom;
-    height: 30%;
-    width: 100%;
-  }
-
-  .team-drop {
-    align-content: center;
-    padding-bottom: 12px;
-  }
+    .team-drop {
+        align-content: center;
+        padding-bottom: 12px;
+    }
 }

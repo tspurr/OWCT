@@ -9,8 +9,8 @@ firebase.auth().signInAnonymously();
 
 
 const database          = firebase.firestore();
-const scrapeTournament  = firebase.functions().httpsCallable('GameBattlesAPI');
-const getTeamSR         = firebase.functions().httpsCallable('OverBuffAPI');
+const GameBattlesAPI    = firebase.functions().httpsCallable('GameBattlesAPI');
+const OverBuffAPI       = firebase.functions().httpsCallable('OverBuffAPI');
 
 let selectTeam          = document.getElementById('teamMenu');
 let selectTournament    = document.getElementById('tournMenu');
@@ -18,24 +18,8 @@ let teamTableBody       = document.getElementById('teamTable');
 
 
 // ==================================
-//              Main Async
+//     Refresh Team Dropdown List
 // ==================================
-// DO NOT RUN ANYTHING IN HERE BESIDES WHAT NEEDS TO LOAD ON
-// PAGE LOAD!! EVERYTHING ELSE CAN BE NOT HERE! GOT IT?!?!
-async function main() {
-
-    await loadTournaments();
-
-}
-
-
-// ==================================
-//          Main Async Call
-// ==================================
-main()
-
-
-// Called in main when page is loaded, the refreshTeams button will
 // also refresh the menu and call this function
 async function refreshTeams() {
 
@@ -59,9 +43,12 @@ async function refreshTeams() {
 
     }
 
+    toast.show('Team Dropdown Refreshed!');
+
 }
 
 
+// Function to fix the display of SR to not be -1
 function displaySR(SR) {
     if(SR === -1) {
         return 'N/A';
@@ -71,9 +58,9 @@ function displaySR(SR) {
 }
 
 
-// Called to load team table
-// Is given the value of the team selected to then process the data into
-// the table
+// ==================================
+//          Team Table/Data
+// ==================================
 async function loadTeamTable(teamName) {
 
     let tournamentName = selectTournament.value;
@@ -102,6 +89,8 @@ async function loadTeamTable(teamName) {
 
     }
 
+    toast.show('Team Table Loaded!');
+
 }
 
 
@@ -113,16 +102,44 @@ async function refreshTeamSR() {
     let tournamentName = selectTournament.value;
     let team = selectTeam.value;
 
-    await getTeamSR({team: team, tournament: tournamentName})
-        .then(() => {
-            loadTeamTable(team);
-        });
+    let resp = await OverBuffAPI({type: 'All', team: team, tournament: tournamentName});
+
+    if(resp.error != '') {
+        toast.Error(resp.error);
+    } else {
+        toast.show(resp.response);
+    }
+
+    loadTeamTable(team);
 
 }
 
 
 // ==================================
-//         Refresh Tournaments
+//   Refresh All Teams Skill Ratings
+// ==================================
+async function refreshTeamsSR() {
+
+    let tournamentName = selectTournament.value;
+    let teams = await database.collection(tournamentName).doc('info').get();
+        teams = teams.data().teams;
+
+    for(var i = 0; i < teams.length; i++) {
+
+        let resp = await OverBuffAPI({type: 'All', team: team, tournament: tournamentName});
+        
+        if(resp.error != '') {
+            toast.Error(resp.error);
+        } else {
+            toast.show(resp.response);
+        }
+    }
+
+}
+
+
+// ==================================
+//      Refresh Tournaments List
 // ==================================
 async function loadTournaments() {
 
@@ -154,7 +171,7 @@ async function refreshTournament() {
 
     let tournID = '159390';
 
-    scrapeTournament( {id: tournID} )
+    GameBattlesAPI( {id: tournID} )
         .then((result) => {
             console.log(result);
         })
@@ -165,3 +182,19 @@ async function refreshTournament() {
 }
 
 
+// ==================================
+//              Main Async
+// ==================================
+// DO NOT RUN ANYTHING IN HERE BESIDES WHAT NEEDS TO LOAD ON
+// PAGE LOAD!! EVERYTHING ELSE CAN BE NOT HERE! GOT IT?!?!
+async function main() {
+
+    await loadTournaments();
+
+}
+
+
+// ==================================
+//          Main Async Call
+// ==================================
+main()
