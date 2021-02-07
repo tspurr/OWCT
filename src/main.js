@@ -169,15 +169,26 @@ async function loadTournaments() {
 // ==================================
 async function refreshTournament() {
 
+    let tournName = selectTournament.value;
     let tournID = '159390';
 
-    GameBattlesAPI( {id: tournID} )
-        .then((result) => {
-            console.log(result);
-        })
-        .catch((error) => {
-            console.error(error);
-        });
+    // await GameBattlesAPI( {id: tournID} )
+    //     .then((result) => {
+    //         console.log(result);
+    //     })
+    //     .catch((error) => {
+    //         console.error(error);
+    //     });
+
+    let teams = await database.collection(tournName).doc('info').get();
+        teams = teams.data().teams;
+
+    for(var i = 0; i < teams.length; i++) {
+
+        await OverBuffAPI({type: 'All', team: teams[i], tournament: tournName});
+        console.log(`${teams[i]} SR gotten`);
+
+    }
     
 }
 
