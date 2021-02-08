@@ -122,7 +122,7 @@
                         <option value="">Select a Tournament</option>
                     </select>
 
-                    <select id="teamMenu" onchange="loadTeamTable(this.value)" class="team-selector">
+                    <select id="teamMenu" onchange="loadTeam(this.value)" class="team-selector">
                         <option value="">Select a Team</option>
                     </select>
 
@@ -145,6 +145,7 @@
                         </tbody>
                     </table>
 
+                    <p class="notice"><i>*These skill ratings are taken from overbuff</i></p>
                     <!--Should refresh the team's SR and reload the table-->
                     <button id="refreshTeamTable" class="team-table-refresh" onclick="refreshTeamSR()">Refresh</button>
 
@@ -152,11 +153,29 @@
 
             </div>
 
-            <div class="team-stats"></div>
+            <div class="team-stats">
+
+                <h3>Team Statistics</h3>
+
+                <table>
+                    <tbody id="stats">
+
+                    </tbody>
+                </table>
+                
+            </div>
 
         </div>
 
         <div class="team-footer">
+
+            <h3>Match Results</h3>
+            <table>
+                <tbody id="matches">
+
+                </tbody>
+            </table>
+
             <button id="refreshAll" class="refresh-all" onclick="refreshTournament()">Refresh All</button>
         </div>
 

@@ -30,7 +30,9 @@ body::-webkit-scrollbar-thumb {
 
 main {
     margin-left: 4rem;
-    /*padding: 1rem;*/
+    position: relative;
+    height: 100%;
+    padding: 0;
 }
 
 
@@ -38,40 +40,52 @@ main {
           Home Page
 #############################*/
 .team-main {
-  /* background-color: pink; */
-    position: relative;
+    /* background-color: pink; */
+    position: fixed;
     padding: 0;
     height: 70vh;
+    width: 100%;
 }
 
 .team-footer {
-  /* background-color: aqua; */
-    position: relative;
+    position: absolute;
     border-top: 1px solid white;
-    height: 20vh;
+    margin-top: 70vh;
+    height: 26vh;
+    width: 100%;
+    /* background-color: aqua; */
+}
+
+.team-footer h3 {
+    margin: 5px;
 }
 
 .team-disp {
-  /* background-color: aquamarine; */
+    /* background-color: aquamarine; */
     position: absolute;
     height: 100%;
     width: 70%;
 }
 
 .team-drop {
-  position: relative;
-  /* background-color: cadetblue; */
+    position: relative;
+    /* background-color: cadetblue; */
     height: 10%;
     width: 100%;
 }
 
 .team-stats {
-  /* background-color: rgb(232, 238, 175); */
+    /* background-color: rgb(232, 238, 175); */
     border-left: 1px solid white;
     float: right;
     position: relative;
-    height: 70vh;
+    height: 100%;
     width: 30%;
+}
+
+.team-stats h3 {
+    margin: 5px;
+    margin-left: 10px;
 }
 
 .team-selector {
@@ -152,6 +166,13 @@ td {
     right: 5px;
 }
 
+.notice {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-size: 10px;
+}
+
 
 /*###########################
     Small Screen Adjustment
@@ -184,5 +205,9 @@ td {
     .team-drop {
         align-content: center;
         padding-bottom: 12px;
+    }
+
+    .team-footer {
+        
     }
 }

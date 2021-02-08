@@ -13,7 +13,7 @@
 .navbar {
     z-index: 100;
     width: 4rem;
-    height: 100vh;
+    height: 100%;
     position: fixed;
     left: 0;
     top: 0;

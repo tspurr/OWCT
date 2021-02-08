@@ -15,6 +15,8 @@ const OverBuffAPI       = firebase.functions().httpsCallable('OverBuffAPI');
 let selectTeam          = document.getElementById('teamMenu');
 let selectTournament    = document.getElementById('tournMenu');
 let teamTableBody       = document.getElementById('teamTable');
+let teamStats           = document.getElementById('stats');
+let teamMatches         = document.getElementById('matches');
 
 
 // ==================================
@@ -53,7 +55,15 @@ function displaySR(SR) {
     if(SR === -1) {
         return 'N/A';
     }else {
-        return SR;
+        return Math.floor(SR);
+    }
+}
+
+function displayWin(wl) {
+    if(wl === 0) {
+        return 'Loss';
+    }else {
+        return 'Win';
     }
 }
 
@@ -61,35 +71,73 @@ function displaySR(SR) {
 // ==================================
 //          Team Table/Data
 // ==================================
-async function loadTeamTable(teamName) {
+async function loadTeam(teamName) {
 
     let tournamentName = selectTournament.value;
 
     // Set the table back to nothing
     teamTableBody.innerHTML = '';
+    teamMatches.innerHTML = '';
+    teamStats.innerHTML = '';
 
     if(teamName === 'Select a Team')
         return;
 
-    let members = await database.collection(tournamentName).doc(teamName).get();
-        members = members.data().members;
+    let team    = await database.collection(tournamentName).doc(teamName).get();
+        team    = team.data();
 
-    // Loop thorugh the members on the team and store the rel. information
-    for(var i = 0; i < members.length; i++) {
+    // Team Table with Players SR
+    let members = team.members;
 
-        let row = document.createElement('tr');
-        
+    // Create a loading indicator
+    let row = document.createElement('tr');   
         row.innerHTML = 
-           `<td>${members[i].BNet}</td>
-            <td class="table-right">${displaySR(members[i].SR[0])}</td>
-            <td class="table-right">${displaySR(members[i].SR[1])}</td>
-            <td class="table-right">${displaySR(members[i].SR[2])}</td>`;
+           `<td>Loading...</td>
+            <td class="table-right">N/A</td>
+            <td class="table-right">N/A</td>
+            <td class="table-right">N/A</td>`;
+
+    teamTableBody.appendChild(row);
+
+    teamTableBody.innerHTML = '';
+
+    // Loading the team SR
+    for(var i = 0; i < members.length; i++) {
+        let row = document.createElement('tr');
+            row.innerHTML = 
+            `<td>${members[i].BNet}</td>
+             <td class="table-right">${displaySR(members[i].SR[0])}</td>
+             <td class="table-right">${displaySR(members[i].SR[1])}</td>
+             <td class="table-right">${displaySR(members[i].SR[2])}</td>`;
 
         teamTableBody.appendChild(row);
-
     }
 
-    toast.show('Team Table Loaded!');
+    // Basic Statistics for team
+    let avgSR = document.createElement('tr');
+        avgSR.innerHTML = 
+            `<td>Avg SR</td>
+             <td>${displaySR(team.AvgSR)}</td>`;
+
+    let top6 = document.createElement('tr');
+        top6.innerHTML = 
+            `<td>Top6 SR</td>
+             <td>${displaySR(team.Top6Avg)}</td>`;
+
+    teamStats.appendChild(avgSR);
+    teamStats.appendChild(top6);
+
+    // Team matches for specific tournament
+    let matches = team.matches;
+
+    for(var i = 0; i < matches.length; i++) {
+        let row = document.createElement('tr');
+            row.innerHTML = 
+            `<td>${matches[i].vsName}</td>
+             <td class="table-right">${displayWin(matches[i].wl)}</td>`;
+
+        teamMatches.appendChild(row);
+    }
 
 }
 
@@ -170,15 +218,15 @@ async function loadTournaments() {
 async function refreshTournament() {
 
     let tournName = selectTournament.value;
-    let tournID = '159390';
+    let tournID = '151515';  //'159390';
 
-    // await GameBattlesAPI( {id: tournID} )
-    //     .then((result) => {
-    //         console.log(result);
-    //     })
-    //     .catch((error) => {
-    //         console.error(error);
-    //     });
+    await GameBattlesAPI( {id: tournID} )
+        .then((result) => {
+            console.log(result);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
 
     let teams = await database.collection(tournName).doc('info').get();
         teams = teams.data().teams;
