@@ -25,6 +25,8 @@ OWCT aims to provide a single source of, up-to-date, information for all those w
 - Build your own bracket system
   - *This may or may not happen, depends on usage of app and storage needs for brackets*
 
+<br>
+
 ### Special Thanks
 Poor AUD has had to deal with RELENTLESS questions from be about basically everything. Without him none of this would have been accomplitshed or even tried, so thanks! :)
 
