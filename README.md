@@ -1,7 +1,5 @@
 # Overwatch Collegiate Tracker
 
----
-
 OWCT aims to provide a single source of, up-to-date, information for all those who follow and are interested in the Collegiate Overwatch scene.
 
 <br>
