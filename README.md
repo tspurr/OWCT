@@ -30,6 +30,6 @@ OWCT aims to provide a single source of, up-to-date, information for all those w
 <br>
 
 ### Special Thanks
-Poor AUD has had to deal with RELENTLESS questions from be about basically everything. Without him none of this would have been accomplitshed or even tried, so thanks! :)
+Poor [AUD](https://github.com/AudIsCool) has had to deal with RELENTLESS questions from be about basically everything. Without him none of this would have been accomplitshed or even tried, so thanks! :)
 
 Also, big shout out for Yuena in helping design the UI for the app!
