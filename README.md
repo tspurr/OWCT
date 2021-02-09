@@ -1,5 +1,7 @@
 # Overwatch Collegiate Tracker
 
+[![OWCT Discord Invite](https://img.shields.io/discord/760984071919763457?color=%237289DA&label=chat&logo=discord&logoColor=white)](https://discord.gg/CeEX6wZkNQ)
+
 OWCT aims to provide a single source of, up-to-date, information for all those who follow and are interested in the Collegiate Overwatch scene.
 
 <br>
