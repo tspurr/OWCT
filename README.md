@@ -13,3 +13,19 @@ OWCT aims to provide a single source of, up-to-date, information for all those w
 - Match results
 
 *Note: Until GameBattles requires more information storing like map type and score all that can be collected is a win loss and team played.*
+
+## In Development
+- Ranking system for teams based off skill rating
+  - Can be off because of outdated skill ratings from overbuff
+- Ranking system for teams based of win loss
+  - This will be pretty basic until gamebattles requires more match information to be reported in results
+  - *Such as map and map score for more details*
+- Bracket system for tournament
+  - Can display teams and top 6 average skill rating to give a better understanding of matches and rounds
+- Build your own bracket system
+  - *This may or may not happen, depends on usage of app and storage needs for brackets*
+
+### Special Thanks
+Poor AUD has had to deal with RELENTLESS questions from be about basically everything. Without him none of this would have been accomplitshed or even tried, so thanks! :)
+
+Also, big shout out for Yuena in helping design the UI for the app!
