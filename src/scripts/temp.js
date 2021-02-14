@@ -69,4 +69,81 @@ async function storeMatches(teamID) {
 
 }
 
-storeMatches('34959968');
+async function storeTeams(tournID, tournSURL) {
+
+    let response    = await fetch(GBApi + teamsAPI + tournID);
+    let data        = await response.json();
+    let teamNames   = [];
+
+    // Combine the pages of teams in the tournament
+    let tournTeams  = data.body.records;
+    
+    // Check if there is more than one page of teams in the tournament
+    if(data.body.totalPages > 1) {
+
+        // Loop through every page in the tournament
+        for(var i = 2; i <= data.body.totalPages; i++) {
+
+            // Getting the response from the page
+            let response2   = await fetch(GBApi + teamsAPI + tournID + `?pageNumber=${i}&pageSize=25`);
+            let data2       = await response2.json();
+            tournTeams      = tournTeams.concat(data2.body.records);
+        }
+
+    }
+
+    let storedTeams = [];
+
+    // Loop and create documents for each team in the tournament
+    for(var i = 0; i < tournTeams.length; i++) {
+
+        // Only store eligible teams
+        if(tournTeams[i].eligibilityStatus === 'ELIGIBLE') {
+
+            let teamName = tournTeams[i].team.name.replace(/\|/gi, "");
+        
+            const teamInfo = {
+                name:    teamName,
+                url:     tournTeams[i].team.url,
+                id:      tournTeams[i].team.id,
+                AvgSR:   -1,
+                Top6Avg: -1,
+                updated: new Date().toLocaleString('en-US', {timeZone: 'EST'}),
+                members: [],
+                matches: [],
+            };
+
+            // // Within the tournament collection, set the document by the team name
+            // // to the teamInfo object created above with all the members
+            // await database.collection(tournSURL).doc(teamInfo.name).set(teamInfo)
+            // .catch(function(error) {
+            //     console.error(`########### ${teamInfo.name} ###########`);
+            //     console.error(error);
+            // });
+
+            storedTeams.push(teamInfo);
+            teamNames.push(teamInfo.name);
+            console.log(`${i}:\t ${teamInfo.name}`);
+
+        }
+
+    }
+
+    const teams = {
+        name: tournSURL,
+        id: tournID,
+        teams: teamNames
+    };
+
+    // Store all teams in one file for dropdown
+    await database.collection(tournSURL).doc('info').set(teams)
+    .catch(function(error) {
+        console.error(`########### Teams Storage ###########`);
+        console.error(error);
+    });
+
+}
+
+storeTeams('159390', 'owcc-spring-2021');
+
+// storeMatches('34959968');

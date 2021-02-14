@@ -3,6 +3,7 @@
 // ==================================
 let homePage = 
     `
+    <link rel="stylesheet" href="./css/index.css">
     <div class="team-main">
 
         <div class="team-disp">
@@ -77,6 +78,7 @@ let homePage =
 // ==================================
 let bracketPage = 
     `
+    <link rel="stylesheet" href="./css/bracket.css">
     <div class="team-main">
 
             <div class="team-display"></div>
@@ -93,6 +95,7 @@ let bracketPage =
 // ==================================
 let infoPage = 
     `
+    <link rel="stylesheet" href="./css/info.css">
     <h1>Information</h1>
 
     <p>This is going to be the main page that holds app information</p>

@@ -23,12 +23,14 @@ async function refreshTeams() {
     let selectTeam       = document.getElementById('teamMenu');
     let tournamentName   = selectTournament.value;
 
-    selectTeam.innerHTML = '<option value="">Select a Team</option>';
+    selectTeam.innerHTML = '<option value="">Loading</option>';
 
     let teams = await database.collection(tournamentName).doc('info').get();
         teams = teams.data().teams;
 
     teams.sort(); // Sort the array in alphabetical order
+
+    selectTeam.innerHTML = '<option value="">-- Select Team --</option>';
 
     for(var i = 0; i < teams.length; i++) {
 
@@ -194,12 +196,14 @@ async function refreshTeamsSR() {
 async function loadTournaments() {
 
     let selectTournament = document.getElementById('tournMenu');
-        selectTournament.innerHTML = '<option value="">Select a Tournament</option>';
+        selectTournament.innerHTML = '<option value="">Loading</option>';
 
     // Get all the documents within the tournaments collection
     let tournaments = await database.collection('tournaments').get();
         tournaments = tournaments.docs.map(doc => doc.data());
     
+    selectTournament.innerHTML = '<option value="">-- Select Tournament --</option>';
+
     // Parse thorugh all the tournaments
     for(var i = 0; i < tournaments.length; i++) {
 
@@ -282,7 +286,6 @@ async function loadPage(page) {
 async function main() {
 
     await loadPage('main');
-    await loadTournaments();
 
 }
 
