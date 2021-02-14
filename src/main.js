@@ -2,21 +2,15 @@ const firebase  = require('firebase');
                   require('firebase/firestore');
 const config    = require('./config');
 const toast     = require('./scripts/toast');
+const pages     = require('./scripts/page');
 
 // Initialize the SDK to firebase
 firebase.initializeApp(config.firebaseConfig);
 firebase.auth().signInAnonymously();
 
-
 const database          = firebase.firestore();
 const GameBattlesAPI    = firebase.functions().httpsCallable('GameBattlesAPI');
 const OverBuffAPI       = firebase.functions().httpsCallable('OverBuffAPI');
-
-let selectTeam          = document.getElementById('teamMenu');
-let selectTournament    = document.getElementById('tournMenu');
-let teamTableBody       = document.getElementById('teamTable');
-let teamStats           = document.getElementById('stats');
-let teamMatches         = document.getElementById('matches');
 
 
 // ==================================
@@ -25,8 +19,9 @@ let teamMatches         = document.getElementById('matches');
 // also refresh the menu and call this function
 async function refreshTeams() {
 
-    let tournamentName = selectTournament.value;
-    console.log(tournamentName);
+    let selectTournament = document.getElementById('tournMenu');
+    let selectTeam       = document.getElementById('teamMenu');
+    let tournamentName   = selectTournament.value;
 
     selectTeam.innerHTML = '<option value="">Select a Team</option>';
 
@@ -73,7 +68,11 @@ function displayWin(wl) {
 // ==================================
 async function loadTeam(teamName) {
 
-    let tournamentName = selectTournament.value;
+    let selectTournament = document.getElementById('tournMenu');
+    let teamTableBody = document.getElementById('teamTable');
+    let teamStats = document.getElementById('stats');
+    let teamMatches = document.getElementById('matches');
+    let tournamentName   = selectTournament.value;
 
     // Set the table back to nothing
     teamTableBody.innerHTML = '';
@@ -82,12 +81,6 @@ async function loadTeam(teamName) {
 
     if(teamName === 'Select a Team')
         return;
-
-    let team    = await database.collection(tournamentName).doc(teamName).get();
-        team    = team.data();
-
-    // Team Table with Players SR
-    let members = team.members;
 
     // Create a loading indicator
     let row = document.createElement('tr');   
@@ -98,6 +91,12 @@ async function loadTeam(teamName) {
             <td class="table-right">N/A</td>`;
 
     teamTableBody.appendChild(row);
+
+    let team    = await database.collection(tournamentName).doc(teamName).get();
+        team    = team.data();
+
+    // Team Table with Players SR
+    let members = team.members;
 
     teamTableBody.innerHTML = '';
 
@@ -147,7 +146,9 @@ async function loadTeam(teamName) {
 // ==================================
 async function refreshTeamSR() {
 
-    let tournamentName = selectTournament.value;
+    let selectTournament = document.getElementById('tournMenu');
+    let selectTeam = document.getElementById('teamMenu');
+    let tournamentName   = selectTournament.value;
     let team = selectTeam.value;
 
     let resp = await OverBuffAPI({type: 'All', team: team, tournament: tournamentName});
@@ -168,6 +169,7 @@ async function refreshTeamSR() {
 // ==================================
 async function refreshTeamsSR() {
 
+    let selectTournament = document.getElementById('tournMenu');
     let tournamentName = selectTournament.value;
     let teams = await database.collection(tournamentName).doc('info').get();
         teams = teams.data().teams;
@@ -191,7 +193,8 @@ async function refreshTeamsSR() {
 // ==================================
 async function loadTournaments() {
 
-    selectTournament.innerHTML = '<option value="">Select a Tournament</option>';
+    let selectTournament = document.getElementById('tournMenu');
+        selectTournament.innerHTML = '<option value="">Select a Tournament</option>';
 
     // Get all the documents within the tournaments collection
     let tournaments = await database.collection('tournaments').get();
@@ -217,16 +220,17 @@ async function loadTournaments() {
 // ==================================
 async function refreshTournament() {
 
+    let selectTournament = document.getElementById('tournMenu');
     let tournName = selectTournament.value;
-    let tournID = '151515';  //'159390';
+    let tournID = '159390';  //'151515';
 
-    await GameBattlesAPI( {id: tournID} )
-        .then((result) => {
-            console.log(result);
-        })
-        .catch((error) => {
-            console.error(error);
-        });
+    // await GameBattlesAPI( {id: tournID} )
+    //     .then((result) => {
+    //         console.log(result);
+    //     })
+    //     .catch((error) => {
+    //         console.error(error);
+    //     });
 
     let teams = await database.collection(tournName).doc('info').get();
         teams = teams.data().teams;
@@ -242,12 +246,42 @@ async function refreshTournament() {
 
 
 // ==================================
+//      Loading Specific Pages
+// ==================================
+async function loadPage(page) {
+    let mainPage = document.getElementById('main');
+        mainPage.innerHTML = '';
+
+    switch (page) {
+        case 'main':
+            mainPage.innerHTML = pages.homePage;
+            loadTournaments();
+            break;
+
+        case 'bracket':
+            mainPage.innerHTML = pages.bracketPage;
+            // Load Bracket
+            break;
+    
+        case 'info':
+            break;
+
+        default:
+            mainPage.innerHTML = pages.homePage;
+            break;
+    }
+
+}
+
+
+// ==================================
 //              Main Async
 // ==================================
 // DO NOT RUN ANYTHING IN HERE BESIDES WHAT NEEDS TO LOAD ON
 // PAGE LOAD!! EVERYTHING ELSE CAN BE NOT HERE! GOT IT?!?!
 async function main() {
 
+    await loadPage('main');
     await loadTournaments();
 
 }
