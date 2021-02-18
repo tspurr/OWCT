@@ -2,7 +2,7 @@ const firebase  = require('firebase');
                   require('firebase/firestore');
 const config    = require('./config');
 const toast     = require('./scripts/toast');
-const pages     = require('./scripts/page');
+const $         = require('jquery');
 
 // Initialize the SDK to firebase
 firebase.initializeApp(config.firebaseConfig);
@@ -27,8 +27,6 @@ async function refreshTeams() {
 
     let teams = await database.collection(tournamentName).doc('info').get();
         teams = teams.data().teams;
-
-    teams.sort(); // Sort the array in alphabetical order
 
     selectTeam.innerHTML = '<option value="">-- Select Team --</option>';
 
@@ -247,8 +245,12 @@ async function refreshTournament() {
         console.log(`${teams[i]} SR gotten`);
 
     }
+
+    console.log('Got all team\'s SR!');
     
 }
+
+
 
 
 // ==================================
@@ -260,20 +262,23 @@ async function loadPage(page) {
 
     switch (page) {
         case 'main':
-            mainPage.innerHTML = pages.homePage;
-            loadTournaments();
+            $('#main').load('./html/teamTable.html #teamPage', function() {
+                loadTournaments();
+            });
             break;
 
         case 'bracket':
-            mainPage.innerHTML = pages.bracketPage;
-            // Load Bracket
+            $('#main').load('./html/bracket.html #bracketPage', function() {
+                // Load bracket when built
+            });
             break;
     
         case 'info':
+            $('#main').load('./html/info.html #infoPage');
             break;
 
         default:
-            mainPage.innerHTML = pages.homePage;
+            $('#main').load('./html/teamTable.html #teamPage');
             break;
     }
 

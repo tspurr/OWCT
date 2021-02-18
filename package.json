@@ -49,6 +49,7 @@
     "cheerio": "^1.0.0-rc.5",
     "electron-squirrel-startup": "^1.0.0",
     "firebase": "^8.2.6",
+    "jquery": "^3.5.1",
     "lodash": "^4.17.20",
     "node-fetch": "^2.6.1"
   },
