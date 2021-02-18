@@ -23,7 +23,7 @@ async function refreshTeams() {
     let selectTeam       = document.getElementById('teamMenu');
     let tournamentName   = selectTournament.value;
 
-    selectTeam.innerHTML = '<option value="">Loading</option>';
+    selectTeam.innerHTML = '<option value="">-- Loading --</option>';
 
     let teams = await database.collection(tournamentName).doc('info').get();
         teams = teams.data().teams;
@@ -71,17 +71,17 @@ function displayWin(wl) {
 async function loadTeam(teamName) {
 
     let selectTournament = document.getElementById('tournMenu');
-    let teamTableBody = document.getElementById('teamTable');
-    let teamStats = document.getElementById('stats');
-    let teamMatches = document.getElementById('matches');
+    let teamTableBody    = document.getElementById('teamTable');
+    let teamStats        = document.getElementById('stats');
+    let teamMatches      = document.getElementById('matches');
     let tournamentName   = selectTournament.value;
 
     // Set the table back to nothing
     teamTableBody.innerHTML = '';
-    teamMatches.innerHTML = '';
-    teamStats.innerHTML = '';
+    teamMatches.innerHTML   = '';
+    teamStats.innerHTML     = '';
 
-    if(teamName === 'Select a Team')
+    if(teamName === '-- Select Team --')
         return;
 
     // Create a loading indicator
@@ -155,13 +155,15 @@ async function refreshTeamSR() {
 
     let resp = await OverBuffAPI({type: 'All', team: team, tournament: tournamentName});
 
-    if(resp.error != '') {
+    console.log(resp);
+
+    if(resp.error !== '') {
         toast.Error(resp.error);
     } else {
         toast.show(resp.response);
     }
 
-    loadTeamTable(team);
+    loadTeam(team);
 
 }
 
@@ -228,13 +230,13 @@ async function refreshTournament() {
     let tournName = selectTournament.value;
     let tournID = '159390';  //'151515';
 
-    // await GameBattlesAPI( {id: tournID} )
-    //     .then((result) => {
-    //         console.log(result);
-    //     })
-    //     .catch((error) => {
-    //         console.error(error);
-    //     });
+    await GameBattlesAPI( {id: tournID} )
+        .then((result) => {
+            console.log(result);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
 
     let teams = await database.collection(tournName).doc('info').get();
         teams = teams.data().teams;

@@ -144,6 +144,19 @@ async function storeTeams(tournID, tournSURL) {
 
 }
 
-storeTeams('159390', 'owcc-spring-2021');
+//storeTeams('159390', 'owcc-spring-2021');
 
 // storeMatches('34959968');
+let s = 'cat', t = 'tac';
+if(s.length !== t.length)
+        return false;
+    
+    s = [...s];
+    t = [...t];
+    s.sort();
+    t.sort();
+    
+    if(s !== t)
+        return false;
+    else
+        return true;

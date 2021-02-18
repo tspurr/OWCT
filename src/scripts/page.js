@@ -11,11 +11,11 @@ let homePage =
             <div class="team-drop">
 
                 <select id="tournMenu" onchange="refreshTeams()" class="tourn-selector">
-                    <option value="">Select a Tournament</option>
+                    <option value="">-- Select Tournament --</option>
                 </select>
 
                 <select id="teamMenu" onchange="loadTeam(this.value)" class="team-selector">
-                    <option value="">Select a Team</option>
+                    <option value="">-- Select Team --</option>
                 </select>
 
                 <button id="refreshBtn" class="team-refresh" onclick="refreshTeams()">Refresh</button>
