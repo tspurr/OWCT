@@ -11,6 +11,9 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,
+    center: true,
+    'min-height': 800,
+    'min-width': 450,
     webPreferences: {
       nodeIntegration: true,
       experimentalFeatures: true,

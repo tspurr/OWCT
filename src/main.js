@@ -71,6 +71,7 @@ async function loadTeam(teamName) {
     let teamTableBody    = document.getElementById('teamTable');
     let teamStats        = document.getElementById('stats');
     let teamMatches      = document.getElementById('matches');
+    let updated          = document.getElementById('team-update');
     let tournamentName   = selectTournament.value;
 
     // Set the table back to nothing
@@ -85,9 +86,9 @@ async function loadTeam(teamName) {
     let row = document.createElement('tr');   
         row.innerHTML = 
            `<td>Loading...</td>
-            <td class="table-right">N/A</td>
-            <td class="table-right">N/A</td>
-            <td class="table-right">N/A</td>`;
+            <td class="team-table-right">N/A</td>
+            <td class="team-table-right">N/A</td>
+            <td class="team-table-right">N/A</td>`;
 
     teamTableBody.appendChild(row);
 
@@ -104,12 +105,15 @@ async function loadTeam(teamName) {
         let row = document.createElement('tr');
             row.innerHTML = 
             `<td>${members[i].BNet}</td>
-             <td class="table-right">${displaySR(members[i].SR[0])}</td>
-             <td class="table-right">${displaySR(members[i].SR[1])}</td>
-             <td class="table-right">${displaySR(members[i].SR[2])}</td>`;
+             <td class="team-table-right">${displaySR(members[i].SR[0])}</td>
+             <td class="team-table-right">${displaySR(members[i].SR[1])}</td>
+             <td class="team-table-right">${displaySR(members[i].SR[2])}</td>`;
 
         teamTableBody.appendChild(row);
     }
+
+    // Displaying when the team was last updated
+    updated.innerHTML = `Last Updated: ${team.updated.toLocaleString('en-US', {timeZone: 'America/New_York'})}`;
 
     // Basic Statistics for team
     let avgSR = document.createElement('tr');
@@ -132,7 +136,7 @@ async function loadTeam(teamName) {
         let row = document.createElement('tr');
             row.innerHTML = 
             `<td>${matches[i].vsName}</td>
-             <td class="table-right">${displayWin(matches[i].wl)}</td>`;
+             <td class="match-table-right">${displayWin(matches[i].wl)}</td>`;
 
         teamMatches.appendChild(row);
     }

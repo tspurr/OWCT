@@ -41,61 +41,79 @@ main {
           Home Page
 #############################*/
 .team-main {
-    /* background-color: pink; */
-    position: fixed;
-    padding: 0;
-    height: 70vh;
-    width: 100%;
-}
-
-.team-footer {
-    position: absolute;
-    border-top: 1px solid white;
-    margin-top: 70vh;
-    height: 26vh;
-    width: 100%;
     /* background-color: aqua; */
+    width: 100%;
+    min-width: 420px;
+    height: 68vh;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .team-disp {
-    /* background-color: aquamarine; */
-    position: absolute;
-    height: 100%;
-    width: 70%;
+    /* background-color: cadetblue; */
+    flex: 1 1 70%;
+    min-width: 420px;
+    display: flex;
+    flex-direction: column;
 }
 
 .team-drop {
+    /* background-color: coral; */
+    display: block;
+    padding-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    flex: 1 1 10%;
+}
+
+.team-table {
+    /* background-color: cornflowerblue; */
+    flex: 1 1 90%;
+    overflow-y: scroll;
     position: relative;
-    /* background-color: cadetblue; */
-    height: 10%;
-    width: 100%;
+}
+
+.team-table::-webkit-scrollbar {
+    display: none;
 }
 
 .team-stats {
-    /* background-color: rgb(232, 238, 175); */
-    border-left: 1px solid white;
-    float: right;
-    position: relative;
-    height: 100%;
-    width: 30%;
+    /* background-color: chartreuse; */
+    border-left: solid 1px white;
+    flex: 1 1 29%;
+    overflow-y: scroll;
+}
+
+.team-stats::-webkit-scrollbar {
+    display: none;
 }
 
 .team-stats h3 {
-    margin: 5px;
+    margin: 0;
+    margin-top: 10px;
     margin-left: 10px;
 }
 
-.team-selector {
-    min-width: 10rem;
-    margin-left: 4rem;
-    margin-top: 1rem;
+.team-footer {
+    /* background-color: pink; */
+    border-top: solid 1px white;
+    width: 100%;
+    min-width: 420px;
+    height: 29vh;
+    overflow-y: scroll;
 }
 
-.refresh-all {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
+.team-footer::-webkit-scrollbar {
+    display: none;
 }
+
+.team-footer h3 {
+    margin: 0;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
 
 /*###########################
          Team Table
@@ -112,49 +130,22 @@ table {
     border-color: rgb(0, 0, 0);
 }
 
-tr {
-  /* background-color: blueviolet; */
-}
-
-td {
-  /*background-color: darkblue;*/
-    width: 25%;
-    border-right: 1px solid white;
-    padding-right: 3px;
-}
-
-.team-table {
-  /* background-color: burlywood; */
-    position: relative;
-    height: 90%;
-    width: 100%;
-    overflow: scroll;
-}
-
-.team-table::-webkit-scrollbar {
-    width: 0.25rem;
-}
-
-.team-table::-webkit-scrollbar-track {
-    background: none;
-}
-
-.team-table::-webkit-scrollbar-thumb {
-    background: purple;
-}
-
-.team-table::-webkit-scrollbar-button {
-    width: 0;
-}
-
-.team-table-header {
-    display: table-header-group;
-}
-
-.table-right {
+.team-table-right {
     border-right: 0;
     position: relative;
     text-align: center;
+}
+
+.stats-table-right {
+    border: 0;
+    position: relative;
+    text-align: left;
+}
+
+.match-table-right {
+    border: 0;
+    position: relative;
+    text-align: left;
 }
 
 .team-table-refresh {
@@ -163,59 +154,45 @@ td {
     right: 5px;
 }
 
+#team-update {
+    margin: 0;
+    font-size: 10px;
+    position: absolute;
+    bottom: 12px;
+    left: 2px;
+}
+
 .notice {
+    margin: 0;
     position: absolute;
     bottom: 0;
-    left: 0;
+    left: 2px;
     font-size: 10px;
 }
 
-
 /*###########################
-        Match Table
+         Small Screen
 #############################*/
-.matches {
-    overflow: scroll;
-}
-
-.team-footer h3 {
-    margin: 5px;
-}
-
-/*###########################
-    Small Screen Adjustment
-#############################*/
-@media only screen and (max-width: 600px) {
-
+@media only screen and (max-width: 600px) { 
     main {
-        margin: 0;
-        padding-bottom: 0;
+        margin-left: 0;
+        margin-top: 4.1rem;
     }
 
     .team-main {
-        margin-top: 4rem;
-    }
-
-    .team-disp {
-        position: relative;
-        height: 70%;
-        width: 100%;
+        height: 65vh;
     }
 
     .team-stats {
         border-left: 0;
-        border-top: 1px solid white;
-        /* float: bottom; */
-        height: 30%;
-        width: 100%;
+        border-top: solid 1px white;
     }
 
     .team-drop {
-        align-content: center;
-        padding-bottom: 12px;
+        padding-top: 0;
     }
 
     .team-footer {
-        
+        height: 25vh;
     }
 }

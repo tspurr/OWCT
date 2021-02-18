@@ -45,22 +45,49 @@ main {
 .team-main {
     background-color: aqua;
     width: 100%;
+    min-width: 420px;
     height: 68vh;
     position: relative;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .team-disp {
-    background-color: chartreuse;
-    height: 100%;
-    width: 70%;
-    float: left;
+    background-color: cadetblue;
+    flex: 1 1 70%;
+    min-width: 420px;
+    display: flex;
+    flex-direction: column;
+}
+
+.team-drop {
+    background-color: coral;
+    display: block;
+    padding-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    flex: 1 1 10%;
+}
+
+.team-table {
+    background-color: cornflowerblue;
+    flex: 1 1 90%;
+    overflow-y: scroll;
+    position: relative;
+}
+
+.team-table::-webkit-scrollbar {
+    display: none;
 }
 
 .team-stats {
-    background-color: blueviolet;
-    width: 30%;
-    height: 100%;
-    float: left;
+    background-color: chartreuse;
+    flex: 1 1 30%;
+    overflow-y: scroll;
+}
+
+.team-stats::-webkit-scrollbar {
+    display: none;
 }
 
 .team-stats h3 {
@@ -72,7 +99,13 @@ main {
 .team-footer {
     background-color: pink;
     width: 100%;
+    min-width: 420px;
     height: 29vh;
+    overflow-y: scroll;
+}
+
+.team-footer::-webkit-scrollbar {
+    display: none;
 }
 
 .team-footer h3 {
@@ -81,6 +114,65 @@ main {
     margin-left: 10px;
 }
 
+
+/*###########################
+         Team Table
+#############################*/
+table {
+    vertical-align: center;
+    width: 100%;
+    padding: 5px;
+    display: table;
+    border-collapse: separate;
+    box-sizing: border-box;
+    text-indent: initial;
+    border-spacing: 0;
+    border-color: rgb(0, 0, 0);
+}
+
+.team-table-header {
+    display: table-header-group;
+}
+
+.team-table-right {
+    border-right: 0;
+    position: relative;
+    text-align: center;
+}
+
+.stats-table-right {
+    border: 0;
+    position: relative;
+    text-align: left;
+}
+
+.match-table-right {
+    border: 0;
+    position: relative;
+    text-align: left;
+}
+
+.team-table-refresh {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+
+#team-update {
+    margin: 0;
+    font-size: 10px;
+    position: absolute;
+    bottom: 12px;
+    left: 2px;
+}
+
+.notice {
+    margin: 0;
+    position: absolute;
+    bottom: 0;
+    left: 2px;
+    font-size: 10px;
+}
 
 /*###########################
          Small Screen
@@ -93,6 +185,10 @@ main {
 
     .team-main {
         height: 65vh;
+    }
+
+    .team-drop {
+        padding-top: 0;
     }
 
     .team-footer {
