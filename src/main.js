@@ -62,7 +62,6 @@ function displayWin(wl) {
     }
 }
 
-
 // ==================================
 //          Team Table/Data
 // ==================================
@@ -147,11 +146,10 @@ async function loadTeam(teamName) {
 async function refreshTeamSR() {
 
     let selectTournament = document.getElementById('tournMenu');
-    let selectTeam = document.getElementById('teamMenu');
+    let selectTeam       = document.getElementById('teamMenu');
     let tournamentName   = selectTournament.value;
-    let team = selectTeam.value;
-
-    let resp = await OverBuffAPI({type: 'All', team: team, tournament: tournamentName});
+    let team             = selectTeam.value;
+    let resp             = await OverBuffAPI({type: 'All', team: team, tournament: tournamentName});
 
     console.log(resp);
 
@@ -225,8 +223,8 @@ async function loadTournaments() {
 async function refreshTournament() {
 
     let selectTournament = document.getElementById('tournMenu');
-    let tournName = selectTournament.value;
-    let tournID = '159390';  //'151515';
+    let tournName        = selectTournament.value;
+    let tournID          = '159390';  //'151515';
 
     await GameBattlesAPI( {id: tournID} )
         .then((result) => {

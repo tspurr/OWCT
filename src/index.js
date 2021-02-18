@@ -13,6 +13,7 @@ const createWindow = () => {
     height: 800,
     webPreferences: {
       nodeIntegration: true,
+      experimentalFeatures: true,
     }
   });
 

@@ -33,6 +33,7 @@ main {
     position: relative;
     height: 100%;
     padding: 0;
+    min-width: 400px;
 }
 
 
@@ -54,10 +55,6 @@ main {
     height: 26vh;
     width: 100%;
     /* background-color: aqua; */
-}
-
-.team-footer h3 {
-    margin: 5px;
 }
 
 .team-disp {
@@ -175,6 +172,17 @@ td {
 
 
 /*###########################
+        Match Table
+#############################*/
+.matches {
+    overflow: scroll;
+}
+
+.team-footer h3 {
+    margin: 5px;
+}
+
+/*###########################
     Small Screen Adjustment
 #############################*/
 @media only screen and (max-width: 600px) {
@@ -197,7 +205,7 @@ td {
     .team-stats {
         border-left: 0;
         border-top: 1px solid white;
-        float: bottom;
+        /* float: bottom; */
         height: 30%;
         width: 100%;
     }
