@@ -92,6 +92,7 @@ async function loadTeam(teamName) {
 
     teamTableBody.appendChild(row);
 
+    // Getting selected team information from database
     let team    = await database.collection(tournamentName).doc(teamName).get();
         team    = team.data();
 
@@ -99,6 +100,8 @@ async function loadTeam(teamName) {
     let members = team.members;
 
     teamTableBody.innerHTML = '';
+    teamMatches.innerHTML   = '';
+    teamStats.innerHTML     = '';
 
     // Loading the team SR
     for(var i = 0; i < members.length; i++) {
