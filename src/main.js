@@ -13,6 +13,18 @@ const GameBattlesAPI    = firebase.functions().httpsCallable('GameBattlesAPI');
 const OverBuffAPI       = firebase.functions().httpsCallable('OverBuffAPI');
 
 
+// Logging the response from any function
+// Easier than writing this 100 times
+function response(response) {
+    if(response.error !== ''){
+        toast.Error(response.error)
+        console.error(response.error);
+    } else {
+        toast.show(response.response);
+    }
+}
+
+
 // ==================================
 //     Refresh Team Dropdown List
 // ==================================
@@ -184,12 +196,8 @@ async function refreshTeamsSR() {
     for(var i = 0; i < teams.length; i++) {
 
         let resp = await OverBuffAPI({type: 'All', team: team, tournament: tournamentName});
+        response(resp);
         
-        if(resp.error != '') {
-            toast.Error(resp.error);
-        } else {
-            toast.show(resp.response);
-        }
     }
 
 }
@@ -233,13 +241,9 @@ async function refreshTournament() {
     let tournName        = selectTournament.value;
     let tournID          = '159390';  //'151515';
 
-    await GameBattlesAPI( {id: tournID} )
-        .then((result) => {
-            console.log(result);
-        })
-        .catch((error) => {
-            console.error(error);
-        });
+    let resp = await GameBattlesAPI({type: 'All', tournID: tournID});
+    response(resp);
+    
 
     let teams = await database.collection(tournName).doc('info').get();
         teams = teams.data().teams;
