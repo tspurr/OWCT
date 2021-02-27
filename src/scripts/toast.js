@@ -17,9 +17,8 @@ const toast = {
 
         this.el.textContent = message;
         this.el.className   = 'toast-notif toast-notif-vis toast-err';
-
         this.hideTimeout    = setTimeout(() => {
-            this.el.classList.remove('toast-notif-vis')
+            this.el.classList.remove('toast-notif-vis');
         }, 5000);
 
     },
@@ -30,9 +29,8 @@ const toast = {
 
         this.el.textContent = message;
         this.el.className   = 'toast-notif toast-notif-vis toast-warn';
-
         this.hideTimeout    = setTimeout(() => {
-            this.el.classList.remove('toast-notif-vis')
+            this.el.classList.remove('toast-notif-vis');
         }, 3000);
 
     },
@@ -43,9 +41,8 @@ const toast = {
 
         this.el.textContent = message;
         this.el.className   = 'toast-notif toast-notif-vis';
-
         this.hideTimeout    = setTimeout(() => {
-            this.el.classList.remove('toast-notif-vis')
+            this.el.classList.remove('toast-notif-vis');
         }, 5000);
 
     }
