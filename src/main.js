@@ -1,5 +1,4 @@
 const firebase  = require('firebase');
-                  require('firebase/firestore');
 const config    = require('./config');
 const toast     = require('./scripts/toast');
 const $         = require('jquery');
@@ -8,10 +7,13 @@ const $         = require('jquery');
 firebase.initializeApp(config.firebaseConfig);
 firebase.auth().signInAnonymously();
 
-const database          = firebase.firestore();
-const GameBattlesAPI    = firebase.functions().httpsCallable('GameBattlesAPI');
-const OverBuffAPI       = firebase.functions().httpsCallable('OverBuffAPI');
+const GameBattles = firebase.functions().httpsCallable('GameBattles');
+const OverBuff    = firebase.functions().httpsCallable('OverBuff');
 
+const {getTeamByName, 
+       getTournaments, 
+       getAllTournTeams,
+       getTournamentByName} = require('./database/functions');
 
 // Logging the response from any function
 // Easier than writing this 100 times
@@ -25,9 +27,9 @@ function response(response) {
 }
 
 
-// ==================================
+// ####################################
 //     Refresh Team Dropdown List
-// ==================================
+// ####################################
 // also refresh the menu and call this function
 async function refreshTeams() {
 
@@ -37,16 +39,15 @@ async function refreshTeams() {
 
     selectTeam.innerHTML = '<option value="">-- Loading --</option>';
 
-    let teams = await database.collection(tournamentName).doc('info').get();
-        teams = teams.data().teams;
+    let teams = await getAllTournTeams(tournamentName);
 
     selectTeam.innerHTML = '<option value="">-- Select Team --</option>';
 
     for(var i = 0; i < teams.length; i++) {
 
         let el      = document.createElement('option');
-        el.text     = teams[i];
-        el.value    = teams[i];
+        el.text     = teams[i].name;
+        el.value    = teams[i].name;
 
         selectTeam.appendChild(el);
 
@@ -74,9 +75,9 @@ function displayWin(wl) {
     }
 }
 
-// ==================================
-//          Team Table/Data
-// ==================================
+// ####################################
+//           Team Table/Data
+// ####################################
 async function loadTeam(teamName) {
 
     let selectTournament = document.getElementById('tournMenu');
@@ -104,9 +105,8 @@ async function loadTeam(teamName) {
 
     teamTableBody.appendChild(row);
 
-    // Getting selected team information from database
-    let team    = await database.collection(tournamentName).doc(teamName).get();
-        team    = team.data();
+    // Getting selected team information from BigQuery
+    let team = await getTeamByName(teamName, tournamentName);
 
     // Team Table with Players SR
     let members = team.members;
@@ -120,15 +120,15 @@ async function loadTeam(teamName) {
         let row = document.createElement('tr');
             row.innerHTML = 
             `<td>${members[i].BNet}</td>
-             <td class="team-table-right">${displaySR(members[i].SR[0])}</td>
-             <td class="team-table-right">${displaySR(members[i].SR[1])}</td>
-             <td class="team-table-right">${displaySR(members[i].SR[2])}</td>`;
+             <td class="team-table-right">${displaySR(members[i].tank)}</td>
+             <td class="team-table-right">${displaySR(members[i].damage)}</td>
+             <td class="team-table-right">${displaySR(members[i].support)}</td>`;
 
         teamTableBody.appendChild(row);
     }
 
     // Displaying when the team was last updated
-    updated.innerHTML = `Last Updated: ${team.updated.toLocaleString('en-US', {timeZone: 'America/New_York'})}`;
+    updated.innerHTML = `Last Updated: <b>${team.updated}<b>`;
 
     // Basic Statistics for team
     let avgSR = document.createElement('tr');
@@ -139,63 +139,47 @@ async function loadTeam(teamName) {
     let top6 = document.createElement('tr');
         top6.innerHTML = 
             `<td>Top6 SR</td>
-             <td>${displaySR(team.Top6Avg)}</td>`;
+             <td>${displaySR(team.Top6SR)}</td>`;
 
     teamStats.appendChild(avgSR);
     teamStats.appendChild(top6);
 
-    // Team matches for specific tournament
-    let matches = team.matches;
-
-    for(var i = 0; i < matches.length; i++) {
-        let row = document.createElement('tr');
-            row.innerHTML = 
-            `<td>${matches[i].vsName}</td>
-             <td class="match-table-right">${displayWin(matches[i].wl)}</td>`;
-
-        teamMatches.appendChild(row);
-    }
+    // TODO: Re-setup match storage
 
 }
 
 
-// ==================================
+// ####################################
 //     Refresh Team Skill Ratings
-// ==================================
+// ####################################
 async function refreshTeamSR() {
 
     let selectTournament = document.getElementById('tournMenu');
     let selectTeam       = document.getElementById('teamMenu');
-    let tournamentName   = selectTournament.value;
-    let team             = selectTeam.value;
-    let resp             = await OverBuffAPI({type: 'All', team: team, tournament: tournamentName});
-
-    console.log(resp);
-
-    if(resp.error !== '') {
-        toast.Error(resp.error);
-    } else {
-        toast.show(resp.response);
-    }
+    let tournID          = await getTournamentByName(selectTournament.value);
+    let teamID           = await getTeamByName(selectTeam.value);
+    
+    let resp = await OverBuff({type: 'Team', teamID: teamID, tournID: tournID});
+    response(resp);
 
     loadTeam(team);
 
 }
 
 
-// ==================================
-//   Refresh All Teams Skill Ratings
-// ==================================
+// ####################################
+//    Refresh All Teams Skill Ratings
+// ####################################
 async function refreshTeamsSR() {
 
     let selectTournament = document.getElementById('tournMenu');
-    let tournamentName = selectTournament.value;
-    let teams = await database.collection(tournamentName).doc('info').get();
-        teams = teams.data().teams;
+    let tournName        = selectTournament.value;
+    let tournID          = await getTournamentByName(tournName);
+    let teams            = getAllTournTeams(tournName)
 
     for(var i = 0; i < teams.length; i++) {
 
-        let resp = await OverBuffAPI({type: 'All', team: team, tournament: tournamentName});
+        let resp = await OverBuff({type: 'Team', teamID: teams[i].teamID, tournID: tournID});
         response(resp);
         
     }
@@ -203,17 +187,16 @@ async function refreshTeamsSR() {
 }
 
 
-// ==================================
-//      Refresh Tournaments List
-// ==================================
+// ####################################
+//       Refresh Tournaments List
+// ####################################
 async function loadTournaments() {
 
     let selectTournament = document.getElementById('tournMenu');
         selectTournament.innerHTML = '<option value="">Loading</option>';
 
     // Get all the documents within the tournaments collection
-    let tournaments = await database.collection('tournaments').get();
-        tournaments = tournaments.docs.map(doc => doc.data());
+    let tournaments = await getTournaments();
     
     selectTournament.innerHTML = '<option value="">-- Select Tournament --</option>';
 
@@ -232,25 +215,25 @@ async function loadTournaments() {
 }
 
 
-// ==================================
-//      Refresh Whole Tournament
-// ==================================
+// ####################################
+//       Refresh Whole Tournament
+// ####################################
 async function refreshTournament() {
 
     let selectTournament = document.getElementById('tournMenu');
     let tournName        = selectTournament.value;
-    let tournID          = '159390';  //'151515';
+    let tournID          = await getTournamentByName(tournName);
 
-    let resp = await GameBattlesAPI({type: 'All', tournID: tournID});
+    let resp = await GameBattles({type: 'ALL', tournID: tournID});
     response(resp);
-    
 
-    let teams = await database.collection(tournName).doc('info').get();
-        teams = teams.data().teams;
+    let teams = await getAllTournTeams(tournName);
 
     for(var i = 0; i < teams.length; i++) {
 
-        await OverBuffAPI({type: 'All', team: teams[i], tournament: tournName});
+        let resp2 = await OverBuff({type: 'Team', teamID: teams[i].teamID, tournID: tournID});
+        response(resp2);
+
         console.log(`${teams[i]} SR gotten`);
 
     }
@@ -262,9 +245,9 @@ async function refreshTournament() {
 
 
 
-// ==================================
-//      Loading Specific Pages
-// ==================================
+// ####################################
+//        Loading Specific Pages
+// ####################################
 async function loadPage(page) {
     let mainPage = document.getElementById('main');
         mainPage.innerHTML = '';
@@ -294,9 +277,9 @@ async function loadPage(page) {
 }
 
 
-// ==================================
+// ####################################
 //              Main Async
-// ==================================
+// ####################################
 // DO NOT RUN ANYTHING IN HERE BESIDES WHAT NEEDS TO LOAD ON
 // PAGE LOAD!! EVERYTHING ELSE CAN BE NOT HERE! GOT IT?!?!
 async function main() {
@@ -305,8 +288,7 @@ async function main() {
 
 }
 
-
-// ==================================
+// ####################################
 //          Main Async Call
-// ==================================
+// ####################################
 main()
